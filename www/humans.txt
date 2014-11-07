@@ -1,0 +1,26 @@
+﻿/* TEAM */
+
+    Web Alchemist: Honza Černý
+    Twitter: @iamchemix
+    Web: honzacerny.com
+    Web: kreativnilaborator.cz
+    From: Prague, Bohemia
+
+/* SITE */
+	Language: English
+	Doctype: HTML 5
+	Technologies:
+		HTML
+		CSS
+			Zurb Foundation
+		JavaScript
+			MooTools
+		PHP
+			Nette
+		MySQL
+
+	Tools:
+		Sketch
+		PHP Storm
+		Sublime Text
+		Adminer

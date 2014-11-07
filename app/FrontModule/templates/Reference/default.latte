@@ -1,0 +1,39 @@
+{**
+ * @param array $listOfReferences
+ *}
+{block content}
+
+<div class="row">
+	<div class="column">
+		<h1>Reference</h1>
+	</div>
+</div>
+
+
+<div class="row">
+
+    {foreach $listOfReferences as $reference}
+    <div class="large-6 columns">
+
+        <img src="{$basePath}{$reference->image}">
+
+        <h2 class="name">{$reference->name}
+
+            {if $reference->stars == 5}
+                <span class="stars stars--five">(&#9733;&#9733;&#9733;&#9733;&#9733;)</span>
+            {elseif $reference->stars == 4}
+                <span class="stars stars--five">(&#9733;&#9733;&#9733;&#9733;)</span>
+            {elseif $reference->stars == 3}
+                <span class="stars stars--five">(&#9733;&#9733;&#9733;)</span>
+            {/if}
+        </h2>
+        <h3 class="company">{$reference->company}</h3>
+        <p class="reference">{$reference->content}</p>
+
+
+
+	</div>
+    {if $iterator->isEven()}</div><div class="row">{/if}
+	{/foreach}
+
+</div>

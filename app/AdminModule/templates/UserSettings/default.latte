@@ -1,0 +1,35 @@
+{*
+	UserSettings : default
+*}
+
+{block #title}User profile{/block}
+
+{block #content}
+
+{include "header.latte"}
+
+<div class="row">
+	<div class="columns">
+		{snippet profilePhoto}
+			{if $person->avatar == ''}
+        		<div class="b-empty-state">
+       				<p>Let's choose some nice photo of you.</p>
+       			</div>
+       		{else}
+       			<div class="text-center">
+            		<img src="{$basePath}{$person->avatar}" class="image--circle" >
+            		<a n:href="deleteAvatar!" data-confirm="Remove photo?"><i class="svg svg-small ico-trash"></i></a>
+            	</div>
+       		{/if}
+		{/snippet}
+
+		{include '../Components/form.latte', form => userForm}
+
+		{if $person->name == ''}
+			<div class="b-empty-state">
+				<p>"{$person->username|truncate:5}" what? Please, tell me your name.</p>
+			</div>
+		{/if}
+
+	</div>
+</div>

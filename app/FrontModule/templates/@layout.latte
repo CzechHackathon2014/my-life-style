@@ -1,0 +1,80 @@
+{**
+ * @param string   $basePath    web base path
+ * @param array    $flashes     flash messages
+ * @param boolean  $production  which version devel or production
+ * @param string   $version     name deployed version
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>{ifset #title}{include title|striptags} | {/ifset}Aprila Sandbox</title>
+
+    {if $production}
+        <link rel="stylesheet" href="{$basePath}/style/site/app.min.css?{$version}">
+    {else}
+        <!-- build:css {$basePath}/style/site/app.min.css -->
+        <link rel="stylesheet" href="{$basePath}/style/foundation/normalize.css">
+        <link rel="stylesheet" href="{$basePath}/style/foundation/foundation.css">
+        <link rel="stylesheet" href="{$basePath}/style/site/main.css">
+        <!-- endbuild -->
+    {/if}
+    <!--[if lt IE 9]>
+    <script src="{$basePath}/script/vendor/html5shiv.min.js"></script>
+    <script src="{$basePath}/script/vendor/nwmatcher.min.js"></script>
+    <script src="{$basePath}/script/vendor/selectivizr.min.js"></script>
+    <script src="{$basePath}/script/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,500&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+    {block head}{/block}
+</head>
+
+<body>
+    <script> document.documentElement.className+=' js' </script>
+
+    <header>
+        <div class="row">
+            <div class="column">
+                <div class="brand">Aprila <small>framework</small></div>
+                <nav>
+                    <a n:href="Homepage:default">Homepage</a> |
+                    <a n:href="Reference:default">Reference</a> |
+                    <a n:href="Contact:default">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+    {include content}
+
+
+    <footer>
+        <div class="row">
+            <div class="column">
+                <h3>Aprila</h3>
+                <p>all on </p>
+                <p>
+                    <a href="http://github.com/aprila">github</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    {if $production}
+        <script src="{$basePath}/script/site/app.min.js?{$version}"></script>
+    {else}
+        <!-- build:js {$basePath}/script/site/app.min.js -->
+        <script src="{$basePath}/script/vendor/netteForms.js"></script>
+        <script src="{$basePath}/script/site/mootools.build.js"></script>
+        <script src="{$basePath}/script/site/main.js"></script>
+        <!-- endbuild -->
+    {/if}
+    {block scripts}{/block}
+</body>
+</html>

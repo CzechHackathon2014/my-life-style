@@ -1,0 +1,56 @@
+/**
+ * Typo
+ */
+
+body
+	font-family fontSuper
+	color colorTextMain
+
+
+h1
+	color #000
+	font-weight 800
+	margin-bottom 10px
+	font-size 40px
+	margin-top 0
+
+	@media on_small
+		font-size 60px
+		margin-top 1em
+
+h2
+	color #CACDC4
+	font-weight normal
+	margin-bottom 10px
+	font-size 16px
+	border-bottom 1px solid #CACDC4
+
+h3
+	font-weight normal
+	margin-bottom 3px
+	color #CACDC4
+	font-weight normal
+	font-size 16px
+	margin-bottom 10px
+
+
+h4
+	color colorHigh
+	font-size 20px
+	font-weight normal
+	margin-bottom 2px
+	margin-top 5px
+
+a
+	color colorLink
+	text-decoration underline
+	&:hover
+		color colorLinkHover
+
+.strike
+	text-decoration line-through
+	opacity .6
+
+.small
+	opacity 0.9
+	font-size 80%

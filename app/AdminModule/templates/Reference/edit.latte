@@ -1,0 +1,30 @@
+{*
+	Reference : edit
+*}
+
+{block #title}Edit reference{/block}
+
+{block #content}
+
+<div class="row header">
+	<div class="column text-right">
+		<a n:href="default" data-loading="Page"><i class="svg ico-close"></i></a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="large-12 columns">
+
+		<div n:if="$reference->image" class="text-center">
+			<img class="image--circle" src="{$basePath}{$reference->image}" >
+		</div>
+
+		{include 'form.latte' onlyLogo=>$reference->onlyLogo}
+
+		<span class="button b-button-confirm">
+			<span class="b-button-confirm__question">Delete</span>
+			<span class="b-button-confirm__cancel b-button-confirm__button--hide">Cancel</span>
+			<a n:href="delete $reference->id" class="b-button-confirm__confirm b-button-confirm__button--hide">Confirm</a>
+		</span>
+	</div>
+</div>

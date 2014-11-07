@@ -1,0 +1,89 @@
+{*
+	Reference : default
+*}
+
+{block #title}Reference{/block}
+
+{block #content}
+
+<div class="row header">
+	<div class="columns medium-8">
+		<div class="b-quick-search{if $empty} b-quick-search--disabled{/if}">
+			{form quickSearchForm}
+				<i class="b-quick-search__ico svg ico-search"></i>
+				<input class="b-quick-search__input" size="15" type="search" autocomplete="off" n:name="q" >
+				<a class="b-quick-search__clear {if !$fulltextQuery}b-quick-search__clear--hide{/if}" n:href="default"><i class="svg ico-clear-search"></i></a>
+			{/form}
+		</div>
+	</div>
+
+	<div class="columns medium-4 text-right">
+		<a n:href="add" class="button primary button--icon"><i class="svg ico-new"></i>New reference</a>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="column">
+
+		<h2 class="header--space">Reference</h2>
+
+		<div class="b-datalist">
+			{snippet datalist}
+				{snippet datalistResult}
+					{foreach $listOfReferences as $reference}
+						<div class="row b-datalist__line">
+
+							{if $reference->onlyLogo}
+								<div class="columns medium-1">
+									<img n:if="$reference->image" src="{$basePath}{$reference->image}" class="image--small" >&nbsp;
+								</div>
+								<div class="columns medium-2">
+									<div class="label">LOGO ONLY</div>
+								</div>
+							{else}
+								<div class="columns medium-1">
+									<img n:if="$reference->image" src="{$basePath}{$reference->image}" class="image--circle image--small" >&nbsp;
+								</div>
+								<div class="columns medium-2">
+									{$reference->name}
+								</div>
+							{/if}
+							<div class="columns medium-3">{$reference->company}</div>
+							<div class="columns medium-5"><p class="small">{$reference->content}</p></div>
+							<div class="columns medium-1 text-right">
+								<a n:href="edit $reference->id" class="default-click-action">edit</a>
+								<a n:href="delete! $reference->id" class="ajax b-datalist__remove" data-confirm="Delete {$reference->company} reference?"><i class="svg svg-small ico-trash"></i></a>
+							</div>
+						</div>
+					{/foreach}
+				{/snippet}
+
+				{ifset $showMoreButton}
+					<div class="b-load-more text-center">
+						<a n:href="this page=>$page+1" class="button button--load"><i class="svg ico-load-more"></i>Load more</a>
+					</div>
+				{/ifset}
+
+				{*
+					No search result
+				*}
+				{if empty($listOfReferences) && !$empty}
+					<p>No result</p>
+				{/if}
+				{*
+					Empty state
+				*}
+				{if $empty}
+					<div class="b-empty-state">
+						<p>Ups, no references. Create <a n:href="add" class="b-empty-state__link--create">new one</a>.</p>
+					</div>
+				{/if}
+			{/snippet}
+		</div>
+
+
+
+
+	</div>
+</div>

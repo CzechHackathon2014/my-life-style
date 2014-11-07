@@ -1,0 +1,83 @@
+{*
+	Users : default
+*}
+
+{block #title}Active users{/block}
+
+{block #content}
+<div class="row header">
+	<div class="columns medium-8">
+		<div class="b-quick-search{if $empty} b-quick-search--disabled{/if}">
+			{form quickSearchForm}
+				<i class="b-quick-search__ico svg ico-search"></i>
+				<input class="b-quick-search__input" size="15" type="search" autocomplete="off" n:name="q" >
+				<a class="b-quick-search__clear {if !$fulltextQuery}b-quick-search__clear--hide{/if}" n:href="default"><i class="svg ico-clear-search"></i></a>
+			{/form}
+		</div>
+	</div>
+
+	<div class="columns medium-4 text-right">
+		<a n:href="add" class="button primary button--icon"><i class="svg ico-new"></i>New User</a>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="column">
+
+		<h2 class="header--space">Active users</h2>
+
+		<div class="b-datalist">
+			{snippet datalist}
+				{foreach $listOfUsers as $person}
+					<div class="row b-datalist__line">
+						<div class="columns medium-1">
+							{if $person->avatar == ''}
+								<img src="{$basePath}/image/default/avatar.png" class="image--circle image--small" >
+							{else}
+								<img src="{$basePath}{$person->avatar}" class="image--circle image--small" >
+							{/if}
+						</div>
+						<div class="columns medium-2">
+							{$person->username}
+						</div>
+						<div class="columns medium-3">{$person->email}</div>
+						<div class="columns medium-4">{$person->role}</div>
+						<div class="columns medium-2 text-right">
+							<a n:href="edit $person->id" class="default-click-action">edit</a>
+							{if $user->id != $person->id}
+								<a n:href="deactivate! $person->id" data-confirm="Deactivate user {$person->username}" class="button small alert">deactivate</a>
+							{/if}
+						</div>
+					</div>
+				{/foreach}
+
+				{*
+                	No search result
+   				*}
+				{if empty($listOfUsers)}
+					<p>No result</p>
+				{/if}
+				{*
+					Empty state
+				*}
+				{if $empty}
+					<div class="b-empty-state">
+						<p>No other user? Don't be alone, and create <a n:href="add" class="b-empty-state__link--create">new one</a>.</p>
+					</div>
+				{/if}
+			{/snippet}
+		</div>
+
+	</div>
+</div>
+
+{if $listOfDeactivatedUsers}
+<div class="row footer">
+	<div class="column">
+		<nav class="navigation--footer">
+			<a class="menu-item--inline" n:href="deactivated">Deactivated users</a>
+		</nav>
+	</div>
+</div>
+{/if}

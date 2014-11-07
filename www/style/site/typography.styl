@@ -1,0 +1,62 @@
+/**
+ * Typo
+ */
+
+body
+	font-family fontSuper
+	color colorTextMain
+
+
+h1
+	color #000
+	font-weight 800
+	margin-bottom 10px
+	font-size 18px
+
+	@media on_small
+		font-family fontSuper
+		font-size 20px
+		margin-top 1em
+		border-bottom 1px solid #dfe1e5
+		padding-bottom 15px
+
+h2
+	font-weight normal
+	margin-bottom 10px
+	font-size 16px
+
+	@media on_small
+		font-family fontSuper
+		margin-top 2em
+		font-size 18px
+		font-weight bold
+
+		b
+			font-size 27px
+			color #4cb9e6
+
+h3
+	font-weight normal
+	font-family fontSuper
+	font-size 20px
+	line-height 1
+	padding 10px 0 10px
+
+	@media on_small
+		font-size 20px
+
+h4
+	color colorHigh
+	font-size 20px
+	font-weight normal
+	margin-bottom 2px
+	margin-top 5px
+
+a
+	color colorLink
+	text-decoration underline
+	&:hover
+		color colorLinkHover
+
+p.small
+	font-size 0.7em

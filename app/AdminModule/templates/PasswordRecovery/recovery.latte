@@ -1,0 +1,20 @@
+{var $robots = noindex}
+
+{block #content}
+
+    <div class="row">
+        <div class="small-12 large-12 columns">
+
+            <h1>PASSWORD RESET</h1>
+
+            {ifset $emailSent}
+                <h2>SUCCESS</h2>
+                <h3>Recovery mail was sent to your address.</h3>
+                <h4>Please check your mailbox now.</h4>
+            {else}
+                {control recoveryForm}
+            {/ifset}
+
+        </div>
+
+    </div>

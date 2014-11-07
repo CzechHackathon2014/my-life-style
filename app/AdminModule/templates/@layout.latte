@@ -1,0 +1,112 @@
+{**
+ * Aprila Admin Base layout
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+ * @param string   $language  selected language
+ * @param string   $production  is production version
+ * @param string   $devel  is devel mode on
+ * @param string   $user  user
+ *}
+<!doctype html>
+<html {* lang="cs" class="no-js" *}>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="Kreativní Laboratoř s.r.o." />
+	<title>{block #title|striptags|trim}Administration{/block}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	{if $production}
+		<link rel="stylesheet" type="text/css" href="{$basePath}/style/admin/admin.min.css?ver={$version}" />
+	{else}
+		<!-- build:css {$basePath}/style/admin/admin.min.css -->
+		<link rel="stylesheet" type="text/css" href="{$basePath}/style/foundation-admin/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/style/foundation-admin/foundation.css" />
+		<link rel="stylesheet" type="text/css" href="{$basePath}/style/admin/main.css" />
+		<!-- endbuild -->
+	{/if}
+	{*
+	<script type="text/javascript" src="{$basePath}/script/vendor/modernizr.js"></script>
+	*}
+</head>
+
+
+<body style="overflow:hidden">
+	<div id="initLoading" style="z-index: 1000;position: fixed; top:0; left: 0; height: 1000px; width: 100%; background: #eaeae7 url('{$basePath}/style/admin/img/spiner.svg') no-repeat center 300px;background-size: 80px 80px;"></div>
+
+	{if $user->isLoggedIn()}
+		<div class="navigation-panel">
+			<div class="brand-image">
+				<nav class="navigation navigation--user">
+					<ul>
+						<li class="nav-item--user" n:snippet="layoutAvatar"><a href="#" id="btn-open-system-navigation"><img {if $user->identity->avatar==''}src="{$basePath}/image/default/avatar.png"{else}src="{$basePath}{$user->identity->avatar}"{/if} class="image--circle image--small" ><span class="username {$user->identity->role}" title="{$user->identity->email}">{$user->identity->name?$user->identity->name:$user->identity->username}</span></a></li>
+					</ul>
+				</nav>
+
+				<a class="btn-dashboard{ifCurrent Dashboard:*} active{/ifCurrent}" n:href="Dashboard:default" data-loading="Page"><i class="svg ico-dashboard"></i></a>
+			</div>
+
+			{include "Components/navigation.latte"}
+		</div>
+
+		<div class="settings-navigation-panel">
+			<nav class="navigation navigation--system">
+				<ul>
+					<li {ifCurrent UserSettings:*}class="active"{/ifCurrent}><a title="User settings" n:href="UserSettings:" data-loading="Page">Settings</a></li>
+					{if $user->isAllowed('Users', 'view')}
+						<li {ifCurrent Users:*}class="active"{/ifCurrent}><a n:href="Users:default" data-loading="Page">Users</a></li>
+					{/if}
+
+					<li class="nav-item--logout"><a title="Logout" n:href="Sign:out" data-loading="Page">log out</a></li>
+				</ul>
+			</nav>
+		</div>
+	{/if}
+
+
+	{snippet flashes}
+    	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+    {/snippet}
+
+	<div class="{if !$user->isLoggedIn()}login-panel{else}base-panel{/if}">
+		{include #content}
+	</div>
+
+	{*
+	<script type="text/javascript">
+		var User = {};
+		{if $user->isLoggedIn() && $user->isInRole('user')}
+			User.logged = {$user->isLoggedIn()};
+		{/if}
+		var develMode = {$devel};
+	</script>
+	*}
+
+
+	{if $production}
+		<script type="text/javascript" src="{$basePath}/script/admin/admin.min.js?ver={$version}"></script>
+	{else}
+		<!-- build:js {$basePath}/script/admin/admin.min.js -->
+		<script type="text/javascript" src="{$basePath}/script/vendor/netteForms.js"></script>
+		{*<script type="text/javascript" src="{$basePath}/script/vendor/nette.ajax.js"></script>*}
+		<script type="text/javascript" src="{$basePath}/script/admin/mootools.admin.build.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/system.ajax.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/system.navigation.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/data.toggle.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/block.datalist.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/block.passwordInput.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/block.quickSearch.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/block.fileInput.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/Components/block.buttonConfirm.js"></script>
+		<script type="text/javascript" src="{$basePath}/script/admin/admin.js"></script>
+		<!-- endbuild -->
+	{/if}
+
+	<script type="text/javascript">
+		addEvent('domready', function() {
+			Page.start();
+		});
+	</script>
+</body>
+</html>

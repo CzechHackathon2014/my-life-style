@@ -1,0 +1,29 @@
+/**
+ * Media Queries
+ *
+ * --default-- = mobile #1
+ * small = 768 >= (tablet+)
+ * medium = 1280 >= (tablet+)
+ * large = 1440 >= (tablet+)
+ */
+
+$small_screen = "768px"
+$medium_screen = "1280px"
+$large_screen = "1440px"
+
+on_screen = "only screen"
+on_small = "only screen and (min-width:"+$small_screen+")"
+on_medium = "only screen and (min-width:"+$medium_screen+")"
+on_large = "only screen and (min-width:"+$large_screen+")"
+on_landscape = "only screen and (orientation: landscape)"
+on_portrait = "only screen and (orientation: portrait)"
+on_retina = "only screen and (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 150 / 100), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx)"
+
+.no
+	display none
+
+small
+	font-size 80%
+
+ul
+	margin-left 20px

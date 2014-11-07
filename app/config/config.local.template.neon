@@ -1,0 +1,16 @@
+parameters:
+	site:
+		develMode: true
+		version: devel
+
+	database:
+		dbname: aprilasandbox_devel
+		user: aprilasandbox
+		password: mojetajneheslo
+
+#services:
+#	nette.mailer: JanDrabek\MailPanel\SessionMailer
+#
+#nette:
+#	debugger:
+#		bar: [JanDrabek\MailPanel\MailPanel]

@@ -1,0 +1,141 @@
+/**
+ * Base styles
+ * addons to zurb.foundation
+ */
+
+/**
+ * Media Queries
+ *
+ * --default-- = mobile #1
+ * small = 768 >= (tablet+)
+ * medium = 1280 >= (tablet+)
+ * large = 1440 >= (tablet+)
+ */
+
+$small_screen = "768px"
+$medium_screen = "1280px"
+$large_screen = "1440px"
+
+on_screen = "only screen"
+on_small = "only screen and (min-width:"+$small_screen+")"
+on_medium = "only screen and (min-width:"+$medium_screen+")"
+on_large = "only screen and (min-width:"+$large_screen+")"
+on_landscape = "only screen and (orientation: landscape)"
+on_portrait = "only screen and (orientation: portrait)"
+
+.chromeframe
+	border 15px solid #991b1f
+	padding 50px
+	font-size 22px
+	color black
+	margin 60px
+	background white
+
+.chromeframe a
+	color #2567b1
+
+.no
+	display none
+
+// icons, titles, image button
+i
+.i
+	display inline-block
+	text-indent -100%
+	font-size inherit
+	overflow hidden
+	// font-size 1px
+
+@media on_small
+	.t
+		display inline-block
+		text-indent -500%
+		font-size inherit
+		overflow hidden
+		//font-size 1px
+
+.flash
+	display block
+	text-align center
+	position absolute
+	z-index 9999
+	width 100%
+	padding 30px
+	font-size 30px
+	font-weight bold
+
+	&.info
+		background #addab6
+		color #171e19
+
+.button
+	font-size 20px
+	color #fff
+	background #4f3668
+	text-decoration none
+	text-transform uppercase
+	font-weight: normal
+	border none
+	box-shadow none
+
+	&:hover
+		background #614280
+
+
+
+.btn
+	display inline-block
+	padding 15px 20px
+	color #fff
+	background #4cb9e6
+	text-decoration none
+	text-transform uppercase
+	margin-bottom 10px
+	&:hover
+		color: #fff
+
+.text-right
+	.btn
+		text-align left
+
+@media on_small
+	.btn
+		display inline-block
+		text-indent -500%
+		font-size inherit
+		overflow hidden
+
+small
+	font-size 80%
+
+ul
+	margin-left 20px
+
+
+
+a[href^="#error:"] {
+	background: red;
+	color: white;
+}
+
+form th, form td {
+	vertical-align: top;
+	font-weight: normal;
+}
+
+form th {
+	text-align: right;
+}
+
+form .required label {
+	font-weight: bold;
+}
+
+form .error {
+	color: #D00;
+	font-weight: bold;
+}
+
+html.js .jshidden {
+	display: none;
+}

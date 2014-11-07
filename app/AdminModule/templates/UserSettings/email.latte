@@ -1,0 +1,45 @@
+{*
+	UserSettings : email
+*}
+
+{block #title}Change email{/block}
+
+{block #content}
+
+{include "header.latte"}
+
+<div class="row">
+	<div class="columns">
+
+		<section id="change-email__stepOne" {ifset $openStepTwo}class="hide"{/ifset}>
+			<h3>Step 1/2</h3>
+
+			<div class="form--aprila-base">
+				<div class="row required">
+					<div class="columns medium-3"><label>Curent email:</label></div>
+
+					<div class="columns medium-9"><p>{$person->email}</p></div>
+				</div>
+			</div>
+
+			{control changeEmailForm}
+
+			{ifset $openStepTwo}
+				<a href="#" data-toggle="#change-email__stepTwo,#change-email__stepOne">add codes for {$person->change_email}</a>
+			{/ifset}
+		</section>
+
+		{ifset $openStepTwo}
+			<section id="change-email__stepTwo">
+				<h3>Step 2/2</h3>
+
+				<p>for change email from <em>{$person->email}</em> to <strong>{$person->change_email}</strong>, fill codes from recieved emails</p>
+
+				{control changeEmailStepTwoForm}
+
+				<a href="#" data-toggle="#change-email__stepTwo,#change-email__stepOne">set new email</a>
+			</section>
+		{/ifset}
+
+	</div>
+</div>

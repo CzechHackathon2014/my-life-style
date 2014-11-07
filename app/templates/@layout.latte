@@ -1,0 +1,32 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	{if $production}
+		<link rel="stylesheet" href="{$basePath}/style/site/app.min.css?{$version}">
+	{else}
+		<link rel="stylesheet" href="{$basePath}/style/foundation/normalize.css">
+		<link rel="stylesheet" href="{$basePath}/style/foundation/foundation.css">
+		<link rel="stylesheet" href="{$basePath}/style/site/main.css">
+	{/if}
+	<title>{ifset #title}{include title|striptags} | {/ifset}Aprila Sandbox</title>
+
+
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+</head>
+
+<body>
+	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+	<div class="row">
+		<div class="column">
+			{include content}
+		</div>
+	</div>
+</body>
+</html>
