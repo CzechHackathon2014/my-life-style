@@ -60,12 +60,11 @@ class DayManager extends Nette\Object
 	public function startDay($userId, $timeStamp, $mood) {
 		$day = date("Y-m-d", $timeStamp);
 		
-		$this->createNew($userId, $day);
+		$dayId = $this->getDayIdAndCreateNew($userId, $day);
 		
 		$endDateTime = new \DateTime();
-		$id = 1;
 		
-		$this->repository->update($id, ['start_time' => $startDateTime->format('Y-m-d H:i:s'), 'mood' => $mood]);
+		$this->repository->update($dayId, ['start_time' => $startDateTime->format('Y-m-d H:i:s'), 'mood' => $mood]);
 		
 		return true;
 	}
@@ -79,16 +78,12 @@ class DayManager extends Nette\Object
 	public function evaluateDay($userId, array $notes) {
 		$day = date("Y-m-d");
 		
-		$existingDay = $this->findOneForUser($userId, $day);
-		if (!$existingDay) {
-			$existingDay = $this->createNew($userId, $day);
-		}
+		$dayId = $this->getDayIdAndCreateNew($userId, $day);
 		
 		//TODO inser experience into day
 		$experienceDateTime = new \DateTime();
-		$id = 1;
 		
-		$this->repository->update($id, ['experience_time' => $experienceDateTime->format('Y-m-d H:i:s')]);
+		$this->repository->update($dayId, ['experience_time' => $experienceDateTime->format('Y-m-d H:i:s')]);
 		
 		return true;
 	}
@@ -101,16 +96,22 @@ class DayManager extends Nette\Object
 	public function endDay($userId, $timeStamp) {
 		$day = date("Y-m-d", $timeStamp);
 		
+		$dayId = $this->getDayIdAndCreateNew($userId, $day);
+		
+		$endDateTime = new \DateTime();
+		
+		$this->repository->update($dayId, ['end_time' => $endDateTime->format('Y-m-d H:i:s')]);
+		
+		return true;
+	}
+	
+	protected function getDayIdAndCreateNew($userId, $day) {
 		$existingDay = $this->findOneForUser($userId, $day);
 		if (!$existingDay) {
 			$existingDay = $this->createNew($userId, $day);
 		}
 		
-		$endDateTime = new \DateTime();
 		$id = 1;
-		
-		$this->repository->update($id, ['end_time' => $endDateTime->format('Y-m-d H:i:s')]);
-		
-		return true;
+		return $id;
 	}
 }
