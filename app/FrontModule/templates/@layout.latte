@@ -9,26 +9,22 @@
 <html>
 <head>
     <meta charset="utf-8">
+   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{ifset #title}{include title|striptags} | {/ifset}Aprila Sandbox</title>
+    <title>{ifset #title}{include title|striptags} | {/ifset}My Life Style</title>
 
     {if $production}
         <link rel="stylesheet" href="{$basePath}/style/site/app.min.css?{$version}">
     {else}
         <!-- build:css {$basePath}/style/site/app.min.css -->
-        <link rel="stylesheet" href="{$basePath}/style/foundation/normalize.css">
-        <link rel="stylesheet" href="{$basePath}/style/foundation/foundation.css">
         <link rel="stylesheet" href="{$basePath}/style/site/main.css">
         <!-- endbuild -->
     {/if}
-    <!--[if lt IE 9]>
-    <script src="{$basePath}/script/vendor/html5shiv.min.js"></script>
-    <script src="{$basePath}/script/vendor/nwmatcher.min.js"></script>
-    <script src="{$basePath}/script/vendor/selectivizr.min.js"></script>
-    <script src="{$basePath}/script/vendor/respond.min.js"></script>
-    <![endif]-->
-
-    <link href='http://fonts.googleapis.com/css?family=Roboto:300,500&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
     <link rel="shortcut icon" href="{$basePath}/favicon.ico">
     {block head}{/block}
@@ -37,41 +33,36 @@
 <body>
     <script> document.documentElement.className+=' js' </script>
 
-    <header>
-        <div class="row">
-            <div class="column">
-                <div class="brand">Aprila <small>framework</small></div>
-                <nav>
-                    <a n:href="Homepage:default">Homepage</a> |
-                    <a n:href="Contact:default">Contact</a>
-            </div>
+	<div class="container">
+		<div class="header">
+			<ul class="nav nav-pills pull-right" role="tablist">
+		  		<li role="presentation" {ifCurrent Homepage:* }class="active"{/ifCurrent}><a n:href="Homepage:default">Homepage</a></li>
+				<li role="presentation" {ifCurrent About:* }class="active"{/ifCurrent}><a n:href="About:default">About</a></li>
+				<li role="presentation" {ifCurrent Contact:* }class="active"{/ifCurrent}><a n:href="Contact:default">Contact</a></li>
+			</ul>
+			<h3 class="text-muted">My Life Style</h3>
+	  	</div>
+
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+		{include content}
+
+		<div class="footer">
+        	<p>&copy; M.L.S. team 2014</p>
         </div>
-    </header>
 
-    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
-    {include content}
+	</div>
 
 
-    <footer>
-        <div class="row">
-            <div class="column">
-                <h3>Aprila</h3>
-                <p>all on </p>
-                <p>
-                    <a href="http://github.com/aprila">github</a>
-                </p>
-            </div>
-        </div>
-    </footer>
 
     {if $production}
         <script src="{$basePath}/script/site/app.min.js?{$version}"></script>
     {else}
         <!-- build:js {$basePath}/script/site/app.min.js -->
-        <script src="{$basePath}/script/vendor/netteForms.js"></script>
-        <script src="{$basePath}/script/site/mootools.build.js"></script>
-        <script src="{$basePath}/script/site/main.js"></script>
+		<script src="{$basePath}/script/vendor/netteForms.js"></script>
+		<script src="{$basePath}/components/jquery/dist/jquery.js"></script>
+		<script src="{$basePath}/components/nette.ajax.js/nette.ajax.js"></script>
+		<script src="{$basePath}/script/site/main.js"></script>
         <!-- endbuild -->
     {/if}
     {block scripts}{/block}
