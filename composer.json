@@ -1,24 +1,30 @@
 {
-	"name": "mylifestyle",
-	"description": "",
-	"homepage": "http://mylifestyle.cz",
-	"type": "project",
-	"license": ["MIT","BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
-	"authors": [
-		{
-			"name": "Honza Cerny",
-			"homepage": "http://honzacerny.com"
-		}
-	],
-	"require": {
-		"php": ">= 5.4",
-		"nette/nette": "~2.2",
-		"aprila/aprila": "~0.1",
-		"dg/adminer-custom": "~1.0"
-	},
-	"require-dev": {
-		"jandrabek/nette-mailpanel": "3.1",
-		"nette/tester": "~1.0"
-	},
-	"minimum-stability": "rc"
+    "name": "mylifestyle",
+    "description": "",
+    "homepage": "http://mylifestyle.cz",
+    "type": "project",
+    "license": [
+        "MIT",
+        "BSD-3-Clause",
+        "GPL-2.0",
+        "GPL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "Honza Cerny",
+            "homepage": "http://honzacerny.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.4",
+        "nette/nette": "~2.2",
+        "aprila/aprila": "~0.1",
+        "dg/adminer-custom": "~1.0",
+        "kdyby/facebook": "~1.2"
+    },
+    "require-dev": {
+        "jandrabek/nette-mailpanel": "3.1",
+        "nette/tester": "~1.0"
+    },
+    "minimum-stability": "rc"
 }
