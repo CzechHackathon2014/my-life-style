@@ -31,7 +31,7 @@ CREATE TABLE `day` (
   `expirience_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `date` (`date`),
+  UNIQUE KEY `date` (`date`,`user_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `day_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
@@ -52,4 +52,13 @@ CREATE TABLE `expirience` (
 SET foreign_key_checks = 1;
 
 
--- 2014-07-08 15:22:20
+-- Insert default categories
+
+INSERT INTO `expirience_category` (`id`, `name`) VALUES
+(1,	'Sportovní aktivita'),
+(2,	'Večírek'),
+(3,	'Setkání se s přáteli'),
+(4,	'Potkání nových lidí'),
+(5,	'Kulnářský zážitek'),
+(6,	'Překonání strachu'),
+(7,	'Tvořivost');
