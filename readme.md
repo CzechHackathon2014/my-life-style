@@ -1,21 +1,9 @@
-Aprila Sandbox
-=======================
+MyLifeStyle - open edition
+==========================
 
-It's bundle of basic functionality, which you need to start your next project with administration.
-
+it's application for save your day activity
 
 Status: dev version
-
-
-Admin
- - user authentication (login, password reset)
- - user manager (create new users)
- - reference manager (simple example for inspiration)
-
-Frontend
- - homepage (yes)
- - references (list of references)
- - contact (send me email)
 
 
 
@@ -24,9 +12,7 @@ Installation
 
 ### 1) Clone code from GitHub
 
-clone repository `git clone git@github.com:Aprila/sandbox.git`
-
-TODO: use composer
+clone repository `git clone git@github.com:CzechHackathon2014/my-life-style.git`
 
 
 ### 2) Composer
@@ -50,28 +36,28 @@ and for data
 
 ### 4) SQL
 
-init SQL for users from `vendor/others/Aprila/Model/db/users.sql`
-
-and for references from `app/model/db/init.sql`
+init SQL from `app/model/db/init.sql`
 
 
 ### 5) Apache
 
 update your file `etc/hosts` and add new line
 
-`127.0.0.1 aprila-sandbox.l`
+`127.0.0.1 mylifestyle.l`
 
 apache/virtuals-list
 
 ```
 <VirtualHost *:80>
     DocumentRoot "/Sites/aprila-sandbox/www/
-    ServerName aprila-sandbox.l
-    ServerAlias aprila-sandbox.192.168.1.111.xip.io
+    ServerName mylifestyle.l
+    ServerAlias mylifestyle.192.168.1.111.xip.io
 </VirtualHost>
 ```
 
+### 5) Facebook
 
+register new Facebook app and update configuration in app/config/config.local.neon
 
 
 
@@ -103,6 +89,10 @@ build css from sass
 autocompile
 `grunt watch`
 
+
+### Bower
+
+yes, we user bower, but for easy development process, we save components to git repository
 
 
 ### Tests
