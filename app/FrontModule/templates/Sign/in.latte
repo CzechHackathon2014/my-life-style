@@ -7,6 +7,14 @@
 
 <div class="row">
 	<div class="col-sm-6">
+		<div class="text-center">
+		<a n:href="fbLogin-open!" class="btn-facebook"><i class="fa fa-facebook-square"></i> Login using facebook</a>
+		<br>
+		<br>
+		or
+		<br>
+		<br>
+		</div>
 		<div class="well">
 			{form signForm-form}
 		  		<ul class=error n:if="$form->ownErrors">
@@ -48,7 +56,6 @@
 		  </ul>
 		  <p><a n:href="Sign:up" class="btn btn-info btn-block">Yes please, register now!</a></p>
 
-		  <br><br><a n:href="fbLogin-open!">Login using facebook</a>
 
 	  </div>
   </div>

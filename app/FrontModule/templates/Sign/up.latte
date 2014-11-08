@@ -7,6 +7,14 @@
 
 <div class="row">
 	<div class="col-sm-6">
+		<div class="text-center">
+    		<a n:href="fbLogin-open!" class="btn-facebook"><i class="fa fa-facebook-square"></i> Login using facebook</a>
+    		<br>
+    		<br>
+    		or
+    		<br>
+    		<br>
+    	</div>
 		<div class="well">
 			{form registrationForm}
 				<ul class=error n:if="$form->ownErrors">
@@ -49,9 +57,6 @@
 
 		<p>
 			Máte již účet? <a n:href="Sign:in"><u>přihlašte se</u></a>
-
-			<br><br><a n:href="fbLogin-open!">Login using facebook</a>
-
 		</p>
 	</div>
 </div>
