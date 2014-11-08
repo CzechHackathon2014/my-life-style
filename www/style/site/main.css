@@ -6967,6 +6967,7 @@ body {
   border: 2px solid transparent;
 }
 .btn-facebook:hover,
+.btn-facebook:focus,
 .btn-facebook:active {
   border: 2px solid black;
   color: white;
