@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c7302f265c3b7e5fc60af8c566d19cc",
+    "hash": "7c4ebd108dbaedd17a7f3226687bb5e1",
     "packages": [
         {
             "name": "aprila/aprila",
@@ -1300,7 +1300,7 @@
     "stability-flags": [],
     "prefer-stable": false,
     "platform": {
-        "php": ">= 5.3.7"
+        "php": ">= 5.4"
     },
     "platform-dev": []
 }
