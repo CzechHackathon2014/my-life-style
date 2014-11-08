@@ -46,7 +46,14 @@ class DashboardPresenter extends BasePresenter
 		}
 
 		# TODO: pagination
-		$this -> template -> days = $this-> dayManager -> findAllForUser(1) -> limit(10);
+		$this -> template -> days = $this-> dayManager -> findAllDaysForUser($this->user->getId())->limit(10) -> fetchAll();
+
+		$experiences = array();
+		foreach ($this -> template ->days as $id => $day) {
+			$experiences[$id] = $this -> dayManager -> findAllExperiencesForDay($id);
+		}
+
+		$this -> template -> experiences = $experiences;
 	}
 
 	public function renderDetail($date)
@@ -56,7 +63,7 @@ class DashboardPresenter extends BasePresenter
 			$this->redirect('homepage:default');
 		}
 		
-		$this -> template -> detail = $this -> dayManager -> findAllForUser(1) -> where('date = ?', $date);
+		$this -> template -> detail = $this -> dayManager -> findAllDaysForUser($this->user->getId()) -> where('date = ?', $date);
 	}
 
 }

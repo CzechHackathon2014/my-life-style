@@ -4,13 +4,9 @@
 
 {block content}
 
-{foreach $days as $day}
- <li>$day</li>
-{/foreach}
-
-
-
 <div id="timeline">
+
+{dump}
 
 	<div class="row timeline-movement timeline-movement-top">
 		<div class="timeline-badge timeline-future-movement">
@@ -23,12 +19,11 @@
 		</div>
 	</div>
 
-{foreach range(1,7) as $day}
+{foreach $days as $day}
 	<div class="row timeline-movement">
-
 		<div class="timeline-badge">
-			<span class="timeline-balloon-date-day">18</span>
-			<span class="timeline-balloon-date-month">APR</span>
+			<span class="timeline-balloon-date-day">{$day['date']|date:'%d'}</span>
+			<span class="timeline-balloon-date-month">{$day['date']|date:'%b'}</span>
 		</div>
 
 
@@ -37,13 +32,19 @@
 				<div class="col-sm-11">
 					<div class="timeline-panel left-side">
 						<ul class="timeline-panel-ul">
-							<li><span class="importo">9:17</span></li>
-							<li>spal jsi 7 hodin a probudil jsi se </li>
+							<li><span class="importo">{$day['start_time']|date:'%H:%M'}</span></li>
+							{if @$sleep_time[$day['id']]}
+								<li>spal jsi $sleep_time[$day['id']] hodin a probudil jsi se </li>
+							{else}
+								<li>Po probuzení ses cítil</li>
+							{/if}
 							<li>
-								{if !$iterator->odd}
-								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
-								{else}
+								{if $day['mood'] === 1}
 								<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
+								{elseif $day['mood'] === 2}
+								<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
+								{elseif $day['mood'] === 3}
+								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
 								{/if}
 							</li>
 						</ul>
@@ -58,10 +59,10 @@
 				<div class="col-sm-offset-1 col-sm-11">
 					<div class="timeline-panel right-side">
 						<ul class="timeline-panel-ul">
-							<li><span class="importo">2:34</span></li>
-							<li><i class="fa fa-comment-o"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							<li><i class="fa fa-comment-o"></i> Another fine on day</li>
-							<li><i class="fa fa-comment-o"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+							<li><span class="importo">{$day['experience_time']|date:'%H:%M'}</span></li>
+							{foreach $experiences[$day['id']] as $experience}
+								<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
+							{/foreach}
 						</ul>
 					</div>
 
@@ -70,6 +71,4 @@
 		</div>
 	</div>
 {/foreach}
-
-
 </div>

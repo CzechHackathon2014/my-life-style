@@ -36,7 +36,19 @@ class DayManager extends Nette\Object
 
 	public function findAllForUser($userId)
 	{
-		return $this->repository->findAll()->where('user_id', $userId);
+		$selection = $this->experienceRepository->table();
+		$selection->select('day.*, experience.*')->where('day.user_id = 1')->group('day.id');
+		return $selection;
+	}
+
+	public function findAllDaysForUser($userId)
+	{
+		return $this->repository->table()->where('user_id = ?', $userId);
+	}
+
+	public function findAllExperiencesForDay($dayId)
+	{
+		return $this->experienceRepository->table()->where('day_id = ?', $dayId);
 	}
 
 	/**
