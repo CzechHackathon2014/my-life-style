@@ -19,6 +19,11 @@ class MorningPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
+		# Send unauth users away - we should do so in parent Presenter
+		if ( $this->user->isLoggedIn() !== true ){
+			$this->redirect('homepage:default');
+		}
+		
 		# deside if we wan't to display new day form or redirect to any other
 		# presenter
 		# now we're providing set of links instead of "magic"
@@ -27,7 +32,10 @@ class MorningPresenter extends BasePresenter
 
 	public function renderHowdy()
 	{
-
+		# Send unauth users away - we should do so in parent Presenter
+		if ( $this->user->isLoggedIn() !== true ){
+			$this->redirect('homepage:default');
+		}
 	}
 
 	public function createComponentMorningForm()

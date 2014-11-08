@@ -19,15 +19,14 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		# dashboard is used as a nifty router,
-		# based on data e decide what to show, if in doubts display links
 
 		# Send unauth users away - we should do so in parent Presenter
-		# if (SMTHNG) {
-		# $this -> redirect('homepage:default')
-		# }
+		if ( $this->user->isLoggedIn() !== true ){
+			$this->redirect('homepage:default');
+		}
 
-
+		# dashboard is used as a nifty router,
+		# based on data e decide what to show, if in doubts display links
 
 		$today = new DateTime();
 
@@ -41,12 +40,22 @@ class DashboardPresenter extends BasePresenter
 
 	public function renderList()
 	{
+		# Send unauth users away - we should do so in parent Presenter
+		if ( $this->user->isLoggedIn() !== true ){
+			$this->redirect('homepage:default');
+		}
+
 		# TODO: pagination
 		$this -> template -> days = $this-> dayManager -> findAllForUser(1) -> limit(10);
 	}
 
 	public function renderDetail($date)
 	{
+		# Send unauth users away - we should do so in parent Presenter
+		if ( $this->user->isAuthenticated() !== true ){
+			$this->redirect('homepage:default');
+		}
+		
 		$this -> template -> detail = $this -> dayManager -> findAllForUser(1) -> where('date = ?', $date);
 	}
 
