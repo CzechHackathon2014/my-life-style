@@ -8,6 +8,12 @@ parameters:
 		user: mylifestyle
 		password: strongpassword
 
+# test app for hostname: http://mylifestyle.local
+
+facebook:
+    appId: "705708046184862"
+    appSecret: "f8192f36e6bce1cf91f055af9a4d5d58"
+
 #services:
 #	nette.mailer: JanDrabek\MailPanel\SessionMailer
 #

@@ -19,6 +19,17 @@ parameters:
 	uploadUri: '/data'
 	uploadDir: '%wwwDir%%uploadUri%'
 
+
+extensions:
+    facebook: Kdyby\Facebook\DI\FacebookExtension
+
+
+facebook:
+    appId: "1234567890"
+    appSecret: "as23"
+    permissions: [public_profile, email] # theese are the default read permissions, you might need to
+    graphVersion: v2.1
+
 php:
 	date.timezone: Europe/Prague
 
@@ -44,6 +55,7 @@ services:
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	#- App\Model\UserManager
+	- FacebookUserManager
 	userManager:
 		class: Aprila\Model\UserManager
 		setup:
