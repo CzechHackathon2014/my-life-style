@@ -14,17 +14,38 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `day`;
-CREATE TABLE `day` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(250) COLLATE utf8_czech_ci NOT NULL,
-  `company` varchar(250) COLLATE utf8_czech_ci NOT NULL,
-  `content` text COLLATE utf8_czech_ci NOT NULL,
-  `stars` tinyint(4) NOT NULL,
-  `image` varchar(250) COLLATE utf8_czech_ci NOT NULL,
-  `onlyLogo` char(1) COLLATE utf8_czech_ci NOT NULL DEFAULT '0',
+CREATE TABLE `expirience_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `day` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `date` date NOT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `mood` int(1) unsigned DEFAULT NULL,
+  `expirience_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `date` (`date`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `day_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+CREATE TABLE `expirience` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `day_id` int(10) unsigned DEFAULT NULL,
+  `description` varchar(255) DEFAULT '',
+  `expirience_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `day_id` (`day_id`),
+  KEY `expirience_id` (`expirience_id`),
+  CONSTRAINT `expirience_ibfk_2` FOREIGN KEY (`expirience_id`) REFERENCES `expirience` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `expirience_ibfk_1` FOREIGN KEY (`day_id`) REFERENCES `day` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 -- 2014-07-08 15:22:20
