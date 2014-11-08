@@ -1,11 +1,13 @@
 <?php
 /**
  * @author Honza Cerny (http://honzacerny.com)
+ * @author Martin Surovcak <martin@surovcak.cz>
  */
 
 namespace App\Model;
 
-use Nette;
+use Nette,
+	Nette\DateTime;
 
 class DayManager extends Nette\Object
 {
@@ -43,28 +45,29 @@ class DayManager extends Nette\Object
 	/**
 	 * 
 	 * @param int $userId
-	 * @param string $day
+	 * @param DateTime $day
 	 */
 	protected function createNew($userId, $day)
 	{
-		return $this->repository->table()->insert(['user_id' => $userId, 'date' => $day]);
+		return $this->repository->table()->
+					insert(['user_id' => $userId, 'date' => $day->format('Y-m-d')]);
 	}
 	
 	/**
 	 * 
 	 * @param int $userId
-	 * @param int $timeStamp
+	 * @param DateTime $timeStamp
 	 * @param int $mood
 	 * @return boolean
 	 */
 	public function startDay($userId, $timeStamp, $mood) {
-		$day = date("Y-m-d", $timeStamp);
+		$day = $timeStamp->format('Y-m-d');
 		
 		$dayId = $this->getDayIdAndCreateNew($userId, $day);
 		
-		$endDateTime = new \DateTime();
+		$endDateTime = new DateTime();
 		
-		$this->repository->update($dayId, ['start_time' => $startDateTime->format('Y-m-d H:i:s'), 'mood' => $mood]);
+		$this->repository->table()->where('id=?', $dayId)->update(['start_time' => $timeStamp->format('Y-m-d H:i:s'), 'mood' => $mood]);
 		
 		return true;
 	}
