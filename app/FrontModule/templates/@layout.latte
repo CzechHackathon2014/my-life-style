@@ -36,9 +36,15 @@
 	<div class="container">
 		<div class="header">
 			<ul class="nav nav-pills pull-right" role="tablist">
-		  		<li role="presentation" {ifCurrent Homepage:* }class="active"{/ifCurrent}><a n:href="Homepage:default">Homepage</a></li>
-				<li role="presentation" {ifCurrent About:* }class="active"{/ifCurrent}><a n:href="About:default">About</a></li>
-				<li role="presentation" {ifCurrent Contact:* }class="active"{/ifCurrent}><a n:href="Contact:default">Contact</a></li>
+		  		<li role="presentation" {ifCurrent Homepage:* }class="active"{/ifCurrent}><a n:href="Homepage:default">Úvod</a></li>
+				{if !$user->isLoggedIn()}
+					<li role="presentation" {ifCurrent Sign:in }class="active"{/ifCurrent}><a n:href="Sign:in">Přihlásit se</a></li>
+				{/if}
+				<li role="presentation" {ifCurrent About:* }class="active"{/ifCurrent}><a n:href="About:default">O projektu</a></li>
+				<li role="presentation" {ifCurrent Contact:* }class="active"{/ifCurrent}><a n:href="Contact:default">Kontakt</a></li>
+				{if $user->isLoggedIn()}
+					<li role="presentation" {ifCurrent Dashboard:* }class="active"{/ifCurrent}><a n:href="Dashboard:">Dashboard</a></li>
+				{/if}
 			</ul>
 			<h3 class="text-muted">My Life Style</h3>
 	  	</div>
@@ -47,8 +53,16 @@
 
 		{include content}
 
-		<div class="footer">
-        	<p>&copy; M.L.S. team 2014</p>
+		<div class="row footer">
+			<div class="col-xs-6">
+				<p>&copy; M.L.S. team 2014</p>
+			</div>
+			<div class="col-xs-6 text-right">
+				{if $user->isLoggedIn()}
+					<a n:href="UserSettings:password">Nastaveni</a> /
+					<a n:href="Sign:out">Logout</a>
+				{/if}
+			</div>
         </div>
 
 	</div>
