@@ -6955,3 +6955,14 @@ body {
     border-bottom: 0;
   }
 }
+.flash {
+  padding: 2em;
+}
+.flash.info {
+  background: lightgreen;
+  color: #002200;
+}
+.flash.error {
+  background: darkred;
+  color: #ffffff;
+}
