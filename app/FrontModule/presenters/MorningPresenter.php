@@ -40,10 +40,13 @@ class MorningPresenter extends BasePresenter
 
 	public function createComponentMorningForm()
 	{
+
+		$moods = array(0 => ':(', 1 => ':|', 2 => ':)');
+
 		$form = new Form();
 
 		$form -> addHidden('time_adjusted');
-		$form -> addText('mood');
+		$form -> addSelect('mood', 'Mood', $moods)->addCondition(Form::IS_IN, array(0,1,2));
 		$form -> addText('time');
 
 		$form -> addSubmit('submitMorning', 'submit');

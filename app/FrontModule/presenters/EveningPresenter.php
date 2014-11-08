@@ -38,6 +38,11 @@ class EveningPresenter extends BasePresenter
 		}
 	}
 
+	public function renderTooLong()
+	{
+
+	}
+
 	public function createComponentEveningForm()
 	{
 		$form = new Form();
@@ -70,14 +75,17 @@ class EveningPresenter extends BasePresenter
 			$values['experience_1'], $values['experience_2'], $values['experience_3'],
 		);
 
+		#funny - if we're going to end day at 00:05
+
 		# do funny stuff and store to database
 		# if today hasn't started just silently 
 		# create a new day without a mood nor time
+		#$this -> dayManager -> 
 
 
 		# evaluate the day, we should always have the beginning
 		# $this -> dayManager->startDay(1, $values['mood'])
-		$this -> dayManager -> evaluateDay(1, $experiences);
+		$this -> dayManager -> evaluateDay(1, $store_time, $experiences);
 		$this -> dayManager -> endDay(1, $store_time);
 
 		$this -> redirect('evening:sleeptime');

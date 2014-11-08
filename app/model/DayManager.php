@@ -25,10 +25,12 @@ class DayManager extends Nette\Object
 
 	/**
 	 * @param DayRepository $repository
+	 * @param ExperienceRepository $experienceRepository
 	 */
-	public function __construct(DayRepository $repository)
+	public function __construct(DayRepository $repository, ExperienceRepository $experienceRepository)
 	{
 		$this->repository = $repository;
+		$this->experienceRepository = $experienceRepository;
 	}
 
 
@@ -36,10 +38,21 @@ class DayManager extends Nette\Object
 	{
 		return $this->repository->findAll()->where('user_id', $userId);
 	}
-	
-	public function findOneForUser($userId, $day)
+
+	/**
+	*
+	* @param int $userId
+	* @param DateTime $day
+	*/
+	private function getUserDayId($userId, $day)
 	{
-		return $this->repository->table()->where('user_id', $userId)->where('date', $day);
+		$where = array(
+				'user_id' => $userId,
+				'date'    => $day->format('Y-m-d')
+			);
+
+		$ret = $this->repository->table()->where($where)->fetch()->toArray();
+		return $ret['id'];
 	}
 	
 	/**
@@ -58,63 +71,76 @@ class DayManager extends Nette\Object
 	 * @param int $userId
 	 * @param DateTime $timeStamp
 	 * @param int $mood
-	 * @return boolean
 	 */
 	public function startDay($userId, $timeStamp, $mood) {
-		$day = $timeStamp->format('Y-m-d');
-		
-		$dayId = $this->getDayIdAndCreateNew($userId, $day);
-		
-		$endDateTime = new DateTime();
-		
-		$this->repository->table()->where('id=?', $dayId)->update(['start_time' => $timeStamp->format('Y-m-d H:i:s'), 'mood' => $mood]);
-		
-		return true;
+
+		$insert = array(
+				'user_id'    => $userId,
+				'date'       => $timeStamp->format('Y-m-d'),
+				'start_time' => $timeStamp->format('Y-m-d H:i:s'),
+				'mood'       => $mood
+			);
+
+		$this->repository->table()->insert($insert);
+		# TODO: handle uniq key constraints
+
 	}
 	
 	/**
 	 *
-	 * @param int $userId        	
+	 * @param int $userId
+	 * @param DateTime $day
 	 * @param array $notes
-	 * @return boolean        	
+	 * @return boolean
 	 */
-	public function evaluateDay($userId, array $notes) {
-		$day = date("Y-m-d");
-		
-		$dayId = $this->getDayIdAndCreateNew($userId, $day);
-		
-		//TODO inser experience into day
-		$experienceDateTime = new \DateTime();
-		
-		$this->repository->update($dayId, ['experience_time' => $experienceDateTime->format('Y-m-d H:i:s')]);
-		
-		return true;
+	public function evaluateDay($userId, $day, array $notes) {
+
+		$now = new DateTime;
+
+		# update date
+		$where = array(
+				'user_id' => $userId,
+				'date'    => $day->format('Y-m-d')
+			);
+
+		$update = array(
+				'experience_time' => $now->format('Y-m-d H:i:s'),
+			);
+
+		$this->repository->table()->where($where)->update($update);
+
+		# add experiences - at first get `day_id`
+		$day_id = $this->getUserDayId(1, $now);
+
+		foreach ($notes as $note) {
+			$insert = array(
+					'day_id'      => $day_id,
+					'description' => $note,
+					'category_id' => NULL
+				);
+
+			$this->experienceRepository->table()->insert($insert);
+		}
 	}
 	
 	/*
 	 * @param int $userId
-	 * @param int $timeStamp
+	 * @param DateTime $timeStamp
 	 * @return boolean
 	 */
-	public function endDay($userId, $timeStamp) {
-		$day = date("Y-m-d", $timeStamp);
+	public function endDay($userId, $day) {
 		
-		$dayId = $this->getDayIdAndCreateNew($userId, $day);
-		
-		$endDateTime = new \DateTime();
-		
-		$this->repository->update($dayId, ['end_time' => $endDateTime->format('Y-m-d H:i:s')]);
-		
-		return true;
+		$where = array(
+				'user_id' => $userId,
+				'date'    => $day->format('Y-m-d')
+			);
+
+		$update = array(
+				'end_time' => $day->format('Y-m-d H:i:s')
+			);
+
+		$this->repository->table()->where($where)->update($update);
+
 	}
-	
-	protected function getDayIdAndCreateNew($userId, $day) {
-		$existingDay = $this->findOneForUser($userId, $day);
-		if (!$existingDay) {
-			$existingDay = $this->createNew($userId, $day);
-		}
-		
-		$id = 1;
-		return $id;
-	}
+
 }
