@@ -29,22 +29,34 @@ class DayManager extends Nette\Object
 	{
 		return $this->repository->findAll()->where('user_id', $userId);
 	}
-
-
-	public function startDay($userId)
-	{
-
+	
+	/**
+	 * 
+	 * @param int $userId
+	 * @param int $timeStamp
+	 * @param string $mood
+	 * @return boolean
+	 */
+	public function startDay($userId, $timeStamp, $mood) {
+		return true;
 	}
-
-
-	public function evaluateDay($userId)
-	{
-
+	
+	/**
+	 *
+	 * @param int $userId        	
+	 * @param array $notes
+	 * @return boolean        	
+	 */
+	public function evaluateDay($userId, array $notes) {
+		return true;
 	}
-
-
-	public function endDay($userId)
-	{
-
+	
+	/*
+	 * @param int $userId
+	 * @param int $timeStamp
+	 * @return boolean
+	 */
+	public function endDay($userId, $timeStamp) {
+		return true;
 	}
 }
