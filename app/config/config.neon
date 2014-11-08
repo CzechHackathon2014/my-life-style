@@ -40,6 +40,7 @@ nette:
 
 
 services:
+	- Aprila\Forms\UserFormFactory
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	#- App\Model\UserManager
