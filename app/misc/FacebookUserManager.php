@@ -55,11 +55,24 @@ class FacebookUserManager extends Nette\Object
 	{
 		$userFacebookId;
 
+		if (!isset($me->email)){
+			$email = $userFacebookId.'@user.from.facebook';
+		} else {
+			$email = $me->email;
+		}
+
+		if (!isset($me->name)){
+			$name = "Mr. Noname";
+		} else {
+			$name = $me->name;
+		}
+
+
 		$newUser = array(
 			'facebook_id' => $userFacebookId,
-			'username' => $me->email,
-			'email' => $me->email,
-			'name' => $me->name,
+			'username' => $email,
+			'email' => $email,
+			'name' => $name,
 			'active' => '1',
 			'role' => 'user',
 			'avatar' => 'https://graph.facebook.com/'.$userFacebookId.'/picture',
