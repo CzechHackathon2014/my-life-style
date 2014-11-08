@@ -100,11 +100,11 @@ CREATE TABLE `experience` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `day_id` int(10) unsigned DEFAULT NULL,
   `description` varchar(255) DEFAULT '',
-  `experience_id` int(10) unsigned DEFAULT NULL,
+  `category_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `day_id` (`day_id`),
-  KEY `experience_id` (`experience_id`),
-  CONSTRAINT `experience_ibfk_2` FOREIGN KEY (`experience_id`) REFERENCES `experience` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `experience_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `experience_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `experience_ibfk_1` FOREIGN KEY (`day_id`) REFERENCES `day` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
