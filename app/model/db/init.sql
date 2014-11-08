@@ -52,4 +52,13 @@ CREATE TABLE `expirience` (
 SET foreign_key_checks = 1;
 
 
--- 2014-07-08 15:22:20
+-- Insert default categories
+
+INSERT INTO `expirience_category` (`id`, `name`) VALUES
+(1,	'Sportovní aktivita'),
+(2,	'Večírek'),
+(3,	'Setkání se s přáteli'),
+(4,	'Potkání nových lidí'),
+(5,	'Kulnářský zážitek'),
+(6,	'Překonání strachu'),
+(7,	'Tvořivost');
