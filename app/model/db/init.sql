@@ -14,12 +14,14 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP TABLE IF EXISTS `expirience_category`;
 CREATE TABLE `expirience_category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `day`;
 CREATE TABLE `day` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -34,6 +36,7 @@ CREATE TABLE `day` (
   CONSTRAINT `day_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
+DROP TABLE IF EXISTS `expirience`;
 CREATE TABLE `expirience` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `day_id` int(10) unsigned DEFAULT NULL,
@@ -46,6 +49,7 @@ CREATE TABLE `expirience` (
   CONSTRAINT `expirience_ibfk_1` FOREIGN KEY (`day_id`) REFERENCES `day` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+SET foreign_key_checks = 1;
 
 
 -- 2014-07-08 15:22:20
