@@ -54,11 +54,11 @@ class DayManager extends Nette\Object
 	 * 
 	 * @param int $userId
 	 * @param int $timeStamp
-	 * @param string $mood
+	 * @param int $mood
 	 * @return boolean
 	 */
 	public function startDay($userId, $timeStamp, $mood) {
-		$day = date("m/d/y",$timeStamp);
+		$day = date("Y-m-d", $timeStamp);
 		
 		$this->createNew($userId, $day);
 		
@@ -77,14 +77,18 @@ class DayManager extends Nette\Object
 	 * @return boolean        	
 	 */
 	public function evaluateDay($userId, array $notes) {
-		$day = date("m/d/y");
+		$day = date("Y-m-d");
 		
 		$existingDay = $this->findOneForUser($userId, $day);
-		if(!$existingDay) {
+		if (!$existingDay) {
 			$existingDay = $this->createNew($userId, $day);
 		}
 		
-		//TODO inser notes into day
+		//TODO inser experience into day
+		$experienceDateTime = new \DateTime();
+		$id = 1;
+		
+		$this->repository->update($id, ['experience_time' => $experienceDateTime->format('Y-m-d H:i:s')]);
 		
 		return true;
 	}
@@ -95,10 +99,10 @@ class DayManager extends Nette\Object
 	 * @return boolean
 	 */
 	public function endDay($userId, $timeStamp) {
-		$day = date("m/d/y", $timeStamp);
+		$day = date("Y-m-d", $timeStamp);
 		
 		$existingDay = $this->findOneForUser($userId, $day);
-		if(!$existingDay) {
+		if (!$existingDay) {
 			$existingDay = $this->createNew($userId, $day);
 		}
 		
