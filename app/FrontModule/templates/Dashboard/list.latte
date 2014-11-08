@@ -1,12 +1,75 @@
 {*
-    Dashboard : sleep
+    Dashboard : list
 *}
 
 {block content}
-h1. List
 
 {foreach $days as $day}
  <li>$day</li>
 {/foreach}
 
-{/block}
+
+
+<div id="timeline">
+
+	<div class="row timeline-movement timeline-movement-top">
+		<div class="timeline-badge timeline-future-movement">
+			<a href="#">
+				<i class="fa fa-plus-circle"></i>
+			</a>
+		</div>
+		<div class="timeline-badge timeline-filter-movement">
+			<i class="fa fa-clock-o" style="color: black"></i>
+		</div>
+	</div>
+
+{foreach range(1,7) as $day}
+	<div class="row timeline-movement">
+
+		<div class="timeline-badge">
+			<span class="timeline-balloon-date-day">18</span>
+			<span class="timeline-balloon-date-month">APR</span>
+		</div>
+
+
+		<div class="col-sm-6  timeline-item">
+			<div class="row">
+				<div class="col-sm-11">
+					<div class="timeline-panel left-side">
+						<ul class="timeline-panel-ul">
+							<li><span class="importo">9:17</span></li>
+							<li>spal jsi 7 hodin a probudil jsi se </li>
+							<li>
+								{if !$iterator->odd}
+								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
+								{else}
+								<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
+								{/if}
+							</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-6  timeline-item">
+			<div class="row">
+				<div class="col-sm-offset-1 col-sm-11">
+					<div class="timeline-panel right-side">
+						<ul class="timeline-panel-ul">
+							<li><span class="importo">2:34</span></li>
+							<li><i class="fa fa-comment-o"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+							<li><i class="fa fa-comment-o"></i> Another fine on day</li>
+							<li><i class="fa fa-comment-o"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{/foreach}
+
+
+</div>
