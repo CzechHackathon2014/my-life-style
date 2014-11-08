@@ -7078,3 +7078,6 @@ body {
   color: #253c6e;
   font-size: 1.3em;
 }
+.error {
+  color: #8b0000;
+}

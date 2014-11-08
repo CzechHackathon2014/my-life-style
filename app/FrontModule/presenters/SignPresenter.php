@@ -13,6 +13,8 @@ class SignPresenter extends BasePresenter
 	/** @var ISignFormFactory */
 	private $signFormFactory;
 
+	/** @var \Aprila\Forms\UserFormFactory */
+	private $formFactory;
 
 	/**
 	 * @var \Aprila\Model\UserManager
@@ -28,8 +30,9 @@ class SignPresenter extends BasePresenter
 	/**
 	 * @param ISignFormFactory $signFormFactory
 	 */
-	public function __construct(ISignFormFactory $signFormFactory)
+	public function __construct(ISignFormFactory $signFormFactory, \Aprila\Forms\UserFormFactory $formFactory)
 	{
+		$this->formFactory = $formFactory;
 		$this->signFormFactory = $signFormFactory;
 	}
 
@@ -66,6 +69,25 @@ class SignPresenter extends BasePresenter
 		};
 
 		return $signForm;
+
+	}
+
+
+	/**
+	 * Sign-up form factory.
+	 *
+	 * @return \Nette\Application\UI\Form
+	 */
+	protected function createComponentRegistrationForm()
+	{
+		$registrationForm = $this->formFactory->createRegistrationForm();
+
+		$registrationForm->onSuccess[] = function () {
+			$this->flashMessage('You are successfully registered and logged in');
+			$this->redirect('Dashboard:');
+		};
+
+		return $registrationForm;
 
 	}
 
