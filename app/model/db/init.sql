@@ -31,7 +31,7 @@ CREATE TABLE `day` (
   `expirience_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `date` (`date`),
+  UNIQUE KEY `date` (`date`,`user_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `day_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
