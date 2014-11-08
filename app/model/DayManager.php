@@ -37,7 +37,7 @@ class DayManager extends Nette\Object
 	
 	public function findOneForUser($userId, $day)
 	{
-		return $this->repository->table()->wherePrimary($day);
+		return $this->repository->table()->where('user_id', $userId)->where('date', $day);
 	}
 	
 	/**
@@ -47,7 +47,7 @@ class DayManager extends Nette\Object
 	 */
 	protected function createNew($userId, $day)
 	{
-		return $this->repository->table()->insert(['day' => $day, 'user' => $userId]);
+		return $this->repository->table()->insert(['user_id' => $userId, 'date' => $day]);
 	}
 	
 	/**
@@ -60,9 +60,12 @@ class DayManager extends Nette\Object
 	public function startDay($userId, $timeStamp, $mood) {
 		$day = date("m/d/y",$timeStamp);
 		
-		$this->createNew($userId,$day);
+		$this->createNew($userId, $day);
 		
-		$this->repository->update($day, ['morning' => $timeStamp]);
+		$endDateTime = new \DateTime();
+		$id = 1;
+		
+		$this->repository->update($id, ['start_time' => $startDateTime->format('Y-m-d H:i:s'), 'mood' => $mood]);
 		
 		return true;
 	}
@@ -78,7 +81,7 @@ class DayManager extends Nette\Object
 		
 		$existingDay = $this->findOneForUser($userId, $day);
 		if(!$existingDay) {
-			$existingDay = $this->createNew($userId,$day);
+			$existingDay = $this->createNew($userId, $day);
 		}
 		
 		//TODO inser notes into day
@@ -96,10 +99,13 @@ class DayManager extends Nette\Object
 		
 		$existingDay = $this->findOneForUser($userId, $day);
 		if(!$existingDay) {
-			$existingDay = $this->createNew($userId,$day);
+			$existingDay = $this->createNew($userId, $day);
 		}
 		
-		$this->repository->update($day, ['evening' => $timeStamp]);
+		$endDateTime = new \DateTime();
+		$id = 1;
+		
+		$this->repository->update($id, ['end_time' => $endDateTime->format('Y-m-d H:i:s')]);
 		
 		return true;
 	}
