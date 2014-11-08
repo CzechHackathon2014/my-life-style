@@ -1,16 +1,4 @@
 #!/usr/bin/env bash
-echo 'MooTools packager - FRONTEND'
-# -blocks IE '!ES5' '!ES5-bind' ltIE9 ltIE8 firefox ltFF4 webkit 1.2compat 1.3compat \
-
-packager build \
-	'Core/DOMReady' \
-	'Milkbox/Milkbox' \
-	'Clientcide/SimpleCarousel' \
-	-blocks 1.2compat 1.3compat \
-	> www/script/site/mootools.build.js
-
-
-#!/usr/bin/env bash
 echo 'MooTools packager - BACKEND'
 # -blocks IE '!ES5' '!ES5-bind' ltIE9 ltIE8 firefox ltFF4 webkit 1.2compat 1.3compat \
 

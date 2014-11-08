@@ -4,51 +4,26 @@
 
 {block #content}
 
-<div class="row">
-	<div class="column">
-		<h1>Contact</h1>
-
-        <p>
-            Lorem ipsum dolor,<br>
-            Sit amet 123,<br>
-            Prague<br>
-            Czech Republic<br>
-        </p>
-
-
-        <div class="row">
-            <div class="columns large-8">
-
-                {form contactForm}
-                    <div class="hide"><input type="text" class="text" n:name="email" /></div>
-                    <div class="form__header">
-                        <h2>Contact form</h2>
-                    </div>
-                    <div class="form__body">
-                        <div class="hide"><input type="text" class="text" n:name="email" /></div>
-
-                        <div class="form__line">
-                            {label name /}
-                            <div class="input-field">{input name}</div>
-                        </div>
-
-                        <div class="form__line">
-                            {label liame /}
-                            <div class="input-field">{input liame}</div>
-                        </div>
-
-                        <div class="form__line">
-                            {label note /}
-                            <div class="input-field">{input note cols => 40, rows => 10}</div>
-                        </div>
-
-                        <div>
-                            {input actionSend class=>"button"}
-                        </div>
-                    </div>
-                {/form}
-            </div>
-        </div>
-
+{form contactForm}
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				{label name /}
+				{input name class=>"form-control"}
+			</div>
+			<div class="form-group">
+				{label liame /}
+                {input name class=>"form-control"}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				{label note /}
+				{input note cols => 40, rows => 10, class=>"form-control"}
+			</div>
+		</div>
+		<div class="col-md-12">
+			{input actionSend class=>"btn btn-primary pull-right"}
+		</div>
 	</div>
-</div>
+{/form}
