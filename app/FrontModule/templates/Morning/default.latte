@@ -1,0 +1,29 @@
+{*
+    Morning : default
+*}
+
+{block #content}
+    <h1>How was you sleep?<h1>
+
+                    {form morningForm}
+                    <div class="hide"><input type="text" class="text" n:name="time_adjusted" /></div>
+                    <div class="form__header">
+                        <h2>Contact form</h2>
+                    </div>
+                    <div class="form__body">
+                        <div class="form__line">
+                            {label mood /}
+                            <div class="input-field">{input mood}</div>
+                        </div>
+
+                        <div class="form__line">
+                            {label time /}
+                            <div class="input-field">{input time}</div>
+                        </div>
+
+                        <div>
+                            {input submitMorning class=>"button"}
+                        </div>
+                    </div>
+                {/form}
+{/block}
