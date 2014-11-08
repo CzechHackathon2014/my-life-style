@@ -8,10 +8,10 @@ namespace App\Model;
 use Aprila\Model\BaseRepository;
 use Nette\Utils\Strings;
 
-class ExpirienceRepository extends BaseRepository
+class ExperienceRepository extends BaseRepository
 {
 	/** @var string */
-	public $table = 'expirience';
+	public $table = 'experience';
 
 
 

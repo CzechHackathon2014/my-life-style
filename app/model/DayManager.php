@@ -14,6 +14,11 @@ class DayManager extends Nette\Object
 	 * @var DayRepository
 	 */
 	protected $repository;
+	
+	/**
+	 * @var ExperienceRepository
+	 */
+	protected $experienceRepository;
 
 
 	/**
