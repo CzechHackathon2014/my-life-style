@@ -1,5 +1,5 @@
 parameters:
 	database:
-		dbname: aprilasandbox_test
-		user: aprilasandbox
-		password: mojetajneheslo
+		dbname: mylifestyle_test
+		user: mylifestyle
+		password: strongpassword

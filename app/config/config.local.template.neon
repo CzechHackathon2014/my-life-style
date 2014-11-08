@@ -4,9 +4,9 @@ parameters:
 		version: devel
 
 	database:
-		dbname: aprilasandbox_devel
-		user: aprilasandbox
-		password: mojetajneheslo
+		dbname: mylifestyle_devel
+		user: mylifestyle
+		password: strongpassword
 
 #services:
 #	nette.mailer: JanDrabek\MailPanel\SessionMailer

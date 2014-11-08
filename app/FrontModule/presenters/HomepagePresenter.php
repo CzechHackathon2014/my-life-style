@@ -13,15 +13,9 @@ use Nette,
  */
 class HomepagePresenter extends BasePresenter
 {
-	/**
-	 * @var \App\Model\ReferenceManager @inject
-	 */
-	public $referenceManager;
-
 
 	public function renderDefault()
 	{
-		$this->template->logos = $this->referenceManager->findRandomLogos();
 	}
 
 }
