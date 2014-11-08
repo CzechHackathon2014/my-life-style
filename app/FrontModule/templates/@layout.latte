@@ -55,7 +55,10 @@
            	{/if}
 	  	</div>
 
-		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+		<div n:foreach="$flashes as $flash" class="alert flash {$flash->type} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {if $flash->type == 'error'}<strong>Warning!</strong>{/if} {$flash->message}.
+        </div>
 
 		{include content}
 
@@ -82,6 +85,7 @@
 		<script src="{$basePath}/script/vendor/netteForms.js"></script>
 		<script src="{$basePath}/components/jquery/dist/jquery.js"></script>
 		<script src="{$basePath}/components/nette.ajax.js/nette.ajax.js"></script>
+		<script src="{$basePath}/components/bootstrap/js/alert.js"></script>
 		<script src="{$basePath}/script/site/main.js"></script>
         <!-- endbuild -->
     {/if}
