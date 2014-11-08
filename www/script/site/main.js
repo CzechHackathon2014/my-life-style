@@ -1,3 +1,0 @@
-addEvent('domready', function() {
-
-});
