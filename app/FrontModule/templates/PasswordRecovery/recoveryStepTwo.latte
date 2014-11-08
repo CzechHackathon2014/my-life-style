@@ -1,0 +1,33 @@
+{var $robots = noindex}
+
+{block #content}
+
+<div class="row">
+	<h2>Nastavte si nové heslo</h2>
+	<p>Po odeslání kódu, si budete moci nastavit nové heslo</p>
+</div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		{form recoveryStepTwoForm}
+			<ul class=error n:if="$form->ownErrors">
+				<li n:foreach="$form->ownErrors as $error">{$error}</li>
+			</ul>
+
+			<div class="form-group">
+				{label email class=>"control-label" /}
+				<input n:name="email" class="form-control">
+				{*<span class="help-block"> Error </span>*}
+			</div>
+
+			<div class="form-group">
+				{label token class=>"control-label" /}
+				<input n:name="token" class="form-control">
+				{*<span class="help-block"> Error </span>*}
+			</div>
+
+			<div class="form-group">
+				<input n:name="send" class="btn btn-primary">
+			</div>
+		{/form}
+	</div>
+</div>
