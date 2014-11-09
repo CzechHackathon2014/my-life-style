@@ -89,15 +89,13 @@
 </div>
 
 {if empty($days)}
-	<div>
+	<div class="row">
 		<p>Welcome screen</p>
-		<ul>
-		<li>
-		<a n:href="Morning:default">Začnu ránem</a>
-		</li>
-		<li>
-		<a n:href="Evening:default">Chci začít zhodnocením dnešního dne</a>
-		</li>
-		</ul>
+		<div class="col-xs-12 text-center">
+		<a n:href="Morning:default" class="btn btn-default">Začnu ránem</a>
+		</div>
+		<div class="col-xs-12 text-center">
+		<a n:href="Evening:default" class="btn btn-default">Chci začít zhodnocením dnešního dne</a>
+		</div>
 	</div>
 {/if}
