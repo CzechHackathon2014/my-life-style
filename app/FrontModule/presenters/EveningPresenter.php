@@ -49,9 +49,9 @@ class EveningPresenter extends DiaryPresenter
 		$now  = new DateTime();
 
 		$form -> addTextarea('experience_1', 'První zážitek');
-		$form -> addTextarea('experience_2', 'Druhý zážitel');
+		$form -> addTextarea('experience_2', 'Druhý zážitek');
 		$form -> addTextarea('experience_3', 'Třetí zážitek');
-		$form -> addText('time')->setDefaultValue($now->format('H:i'));
+		$form -> addText('time', 'Jdu spát v')->setDefaultValue($now->format('H:i'));
 
 		$form -> addSubmit('submitEvening', 'Uzavřít den');
 
