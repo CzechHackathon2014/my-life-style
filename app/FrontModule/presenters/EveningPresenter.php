@@ -46,12 +46,12 @@ class EveningPresenter extends DiaryPresenter
 	public function createComponentEveningForm()
 	{
 		$form = new Form();
+		$now  = new DateTime();
 
-		$form -> addHidden('time_adjusted');
 		$form -> addTextarea('experience_1', 'První zážitek');
 		$form -> addTextarea('experience_2', 'Druhý zážitel');
 		$form -> addTextarea('experience_3', 'Třetí zážitek');
-		$form -> addText('time');
+		$form -> addText('time')->setDefaultValue($now->format('H:i'));
 
 		$form -> addSubmit('submitEvening', 'Uzavřít den');
 
@@ -64,11 +64,9 @@ class EveningPresenter extends DiaryPresenter
 	{
 		$values = $form -> getValues();
 
-		if ( $values['time_adjusted'] ){
-			$end_time = $values['time'];
-		} else {
-			$end_time = new DateTime();
-		}
+		$today = new DateTime;
+		$time = new DateTime;
+		$time = $time->from($today->format('Y-m-d ').$values['time']);
 
 		$experiences = array(
 			$values['experience_1'], $values['experience_2'], $values['experience_3'],

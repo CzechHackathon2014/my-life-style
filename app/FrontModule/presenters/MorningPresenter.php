@@ -48,10 +48,7 @@ class MorningPresenter extends DiaryPresenter
 
 		$form = new Form();
 
-		$form -> addHidden('time_adjusted');
-		$form -> addSelect('mood', 'Moje nálada po ránu', $moods)->setDefaultValue(2)->addCondition(Form::IS_IN, array(0,1,2));
-		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'))->setOption('class', 'time');
-
+		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'));
 		$form -> addSubmit('submitMorning0', ':(');
 		$form -> addSubmit('submitMorning1', ':|');
 		$form -> addSubmit('submitMorning2', ':)');
@@ -77,9 +74,8 @@ class MorningPresenter extends DiaryPresenter
 		# detect value for time
 		$today = new DateTime;
 		$time = new DateTime;
-		if ($values['time_adjusted']){
-			$time = $time->from($today->format('Y-m-d ').$values['time']);
-		};
+		$time = $time->from($today->format('Y-m-d ').$values['time']);
+
 
 		# do funny stuff and store to database
 
