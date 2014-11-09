@@ -22,13 +22,15 @@
                         </div>
 
                         <div>
-                            {input submitMorning class=>"button"}
+                            {input submitMorning0 class=>"button"}
+                            {input submitMorning1 class=>"button"}
+                            {input submitMorning2 class=>"button"}
                         </div>
                     </div>
                 {/form}
                     <script>
                     $(document).ready(function () {
-                        $("input#frm-morningForm-time").change(function() {
+                        $('input#frm-morningForm-time').change(function() {
                             alert( "Handler for .change() called." );
                         });
                     })
