@@ -31,15 +31,12 @@ class DashboardPresenter extends DairyPresenter
 		}
 		if (!$last['end_time']){
 			if ($last['date'] == $now->format('Y-m-d 00:00:00')){
-				$this->flashMessage('xxx');
 				$this->redirect('Evening:default');
 			}
 			# Older day, just forgot it!
-			$this->flashMessage('Na hodnocení předešlého dne je pozdě, je potřeba pokračovat novým dnem? Proč?');
 			$this->redirect('Morning:default');
 		}
 		if ($last['date'] == $now->format('Y-m-d 00:00:00')){
-			$this->flashMessage('# Day is over and new hasn\'t begun yet. Go get some sleep and come back tomorrow!');
 			$this->redirect('Dashboard:list');
 		}
 		# there is no event, we start with welcome on Dashboard:list

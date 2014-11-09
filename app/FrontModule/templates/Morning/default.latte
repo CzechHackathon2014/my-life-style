@@ -3,8 +3,8 @@
 *}
 
 {block #content}
-    <h1>How was you sleep?<h1>
 
+    <h1>How was you sleep?</h1>
                     {form morningForm}
                     <div class="hide"><input type="text" class="text" n:name="time_adjusted" /></div>
                     <div class="form__header">
@@ -26,4 +26,11 @@
                         </div>
                     </div>
                 {/form}
+                    <script>
+                    $(document).ready(function () {
+                        $("input#frm-morningForm-time").change(function() {
+                            alert( "Handler for .change() called." );
+                        });
+                    })
+    </script>
 {/block}

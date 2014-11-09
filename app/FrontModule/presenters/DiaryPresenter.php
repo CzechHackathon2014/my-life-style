@@ -24,12 +24,13 @@ abstract class DairyPresenter extends BasePresenter
 	public function beforeRender()
 	{
 		parent::beforeRender();
+		$this -> template -> next_action = $this->getNextAction();
 
 		if ( $this->user->isLoggedIn() !== true ){
 			$this->redirect('homepage:default');
 		}
 
-		$this -> template -> next_action = $this->getNextAction();
+		
 	}
 
 	private function getNextAction(){

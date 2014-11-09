@@ -44,12 +44,13 @@ class MorningPresenter extends DairyPresenter
 	{
 
 		$moods = array(0 => ':(', 1 => ':|', 2 => ':)');
+		$now   = new DateTime;
 
 		$form = new Form();
 
 		$form -> addHidden('time_adjusted');
-		$form -> addSelect('mood', 'Mood', $moods)->addCondition(Form::IS_IN, array(0,1,2));
-		$form -> addText('time');
+		$form -> addSelect('mood', 'Moje nálada po ránu', $moods)->addCondition(Form::IS_IN, array(0,1,2));
+		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'));
 
 		$form -> addSubmit('submitMorning', 'submit');
 
