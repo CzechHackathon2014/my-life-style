@@ -48,9 +48,7 @@ class MorningPresenter extends DiaryPresenter
 
 		$form = new Form();
 
-		$form -> addHidden('time_adjusted');
 		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'));
-
 		$form -> addSubmit('submitMorning0', ':(');
 		$form -> addSubmit('submitMorning1', ':|');
 		$form -> addSubmit('submitMorning2', ':)');
