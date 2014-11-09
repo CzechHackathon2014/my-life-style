@@ -8,9 +8,14 @@ namespace app\FrontModule\presenters;
 
 use Nette\Application\UI\Form,
 	Nette\Utils\DateTime;
+use Nette\Utils\Paginator;
 
 class DashboardPresenter extends DiaryPresenter
 {
+	/**
+	 * @var int
+	 */
+	public $page = 1;
 
 	public function renderDefault()
 	{
@@ -45,20 +50,38 @@ class DashboardPresenter extends DiaryPresenter
 		# show morning
 
 		$this->redirect('Morning:default');
-		
+
 		# last choice is to show list
 	}
 
-	public function renderList()
+	public function renderList($page = 1)
 	{
 		# Send unauth users away - we should do so in parent Presenter
 		if ( $this->user->isLoggedIn() !== true ){
 			$this->redirect('homepage:default');
 		}
 
-		# TODO: pagination
+
+		$this->page = $page;
+
+		$paginator = new Paginator();
+		$paginator->setItemsPerPage(10);
+		$paginator->setPage($this->page);
+		$count = $this->dayManager->getCountDays($this->user->id);
+		$paginator->setItemCount($count);
+
+		if ($count > $paginator->itemsPerPage && !$paginator->last) {
+			$this->template->page = $page;
+			$this->template->showMoreButton = TRUE;
+		} else {
+			$this->template->showMoreButton = FALSE;
+		}
+
 		$now = new DateTime();
-		$this -> template -> days = $this-> dayManager -> findAllDaysForUser($this->user->id)->order('date DESC')->limit(10) -> fetchAll();
+		$this->template->days = $this->dayManager->findAllDaysForUser($this->user->id)
+			->order('date DESC')
+			->limit($paginator->itemsPerPage, $paginator->offset)
+			->fetchAll();
 
 		$experiences = array();
 		$slept = array();
@@ -79,7 +102,7 @@ class DashboardPresenter extends DiaryPresenter
 		if ( $this->user->isAuthenticated() !== true ){
 			$this->redirect('homepage:default');
 		}
-		
+
 		$this -> template -> detail = $this -> dayManager -> findAllDaysForUser($this->user->getId()) -> where('date = ?', $date);
 	}
 
