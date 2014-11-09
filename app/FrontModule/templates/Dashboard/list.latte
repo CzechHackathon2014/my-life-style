@@ -86,6 +86,12 @@
 {/foreach}
 </div>
 
+<div n:if="$showMoreButton" class="row text-center">
+	<br>
+	<a n:href="list ($page + 1)" class="btn btn-default">Load more</a>
+</div>
+
+
 {if empty($days)}
 	<div>
 		<p>Welcome screen</p>
