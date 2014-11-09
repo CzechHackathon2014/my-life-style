@@ -3,8 +3,18 @@ MyLifeStyle - open edition
 
 it's application for save your day activity
 
-Status: dev version
+Status: executable without tests
 
+
+We prepare this application on CzechHackathon event.
+
+Who is we?
+
+Honza Cerny https://github.com/chemix
+Martin Surovcak https://github.com/msurovcak
+Martin Chapcak  https://github.com/manfm
+Jakub Bouček https://github.com/jakubboucek
+David Pavliska http://pavliska.com
 
 
 Installation
@@ -29,10 +39,6 @@ write for folders log and temp
 
 `$ chmod -R a+rw temp log`
 
-and for data
-
-`$ chmod -R a+rw www/data`
-
 
 ### 4) SQL
 
@@ -43,14 +49,14 @@ init SQL from `app/model/db/init.sql`
 
 update your file `etc/hosts` and add new line
 
-`127.0.0.1 mylifestyle.l`
+`127.0.0.1 mylifestyle.local`
 
 apache/virtuals-list
 
 ```
 <VirtualHost *:80>
-    DocumentRoot "/Sites/aprila-sandbox/www/
-    ServerName mylifestyle.l
+    DocumentRoot "/Sites/mylifestyle/www/
+    ServerName mylifestyle.local
     ServerAlias mylifestyle.192.168.1.111.xip.io
 </VirtualHost>
 ```
@@ -104,11 +110,14 @@ run Nette\Tester `vendor/bin/tester tests`
 or way with helper file, create in root folder new file "run_tests"
 
 for example if You use XAMPP on Mac:
+
 ```
 #! /bin/bash
 vendor/bin/tester tests -w tests -p /Applications/XAMPP/bin/php
 ```
-or
+
+or with watch whole application
+
 ```
 #! /bin/bash
 vendor/bin/tester tests -w ./ -p /Applications/XAMPP/bin/php
