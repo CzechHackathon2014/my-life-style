@@ -51,7 +51,7 @@ class EveningPresenter extends DiaryPresenter
 		$form -> addTextarea('experience_1', 'První zážitek');
 		$form -> addTextarea('experience_2', 'Druhý zážitek');
 		$form -> addTextarea('experience_3', 'Třetí zážitek');
-		$form -> addText('time', 'Jdu spát v')->setDefaultValue($now->format('H:i'));
+		$form -> addText('time', 'Jdu spát v')->setDefaultValue($now->format('H:i'))->addRule(Form::PATTERN, 'Zadej čas (10, 10:00)', "^[0-9]{1,2}(:[0-9]{2})?$");
 
 		$form -> addSubmit('submitEvening', 'Uzavřít den');
 
@@ -66,7 +66,8 @@ class EveningPresenter extends DiaryPresenter
 
 		$today = new DateTime;
 		$time = new DateTime;
-		$end_time = $time->from($today->format('Y-m-d ').$values['time']);
+		
+		$end_time = $time->from($today->format('Y-m-d ').(strpos($values['time'],':') ? ($values['time']) : ($values['time'].':00')));
 
 		$experiences = array(
 			$values['experience_1'], $values['experience_2'], $values['experience_3'],
