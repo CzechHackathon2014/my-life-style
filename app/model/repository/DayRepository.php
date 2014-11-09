@@ -14,6 +14,14 @@ class DayRepository extends BaseRepository
 	public $table = 'day';
 
 
-
+	/**
+	 *
+	 * @param int $userId
+	 * @return int
+	 */
+	public function getCountDaysForUser($userId = 0)
+	{
+		return (int) $this->table()->where('user_id = ?', $userId)->count();
+	}
 
 }

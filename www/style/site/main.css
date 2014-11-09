@@ -7018,6 +7018,7 @@ body {
 }
 #timeline .timeline-badge span.timeline-balloon-date-day {
   font-size: 1.4em;
+  display: block;
 }
 #timeline .timeline-badge span.timeline-balloon-date-month {
   font-size: .7em;

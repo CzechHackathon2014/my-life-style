@@ -163,4 +163,14 @@ class DayManager extends Nette\Object
 
 	}
 
+
+	/**
+	 * @param int $userId
+	 * @return int
+	 */
+	public function getCountDays($userId = 0)
+	{
+		return (int) $this->repository->getCountDaysForUser($userId);
+	}
+
 }

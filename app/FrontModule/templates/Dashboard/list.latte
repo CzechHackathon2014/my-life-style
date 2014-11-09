@@ -18,8 +18,8 @@
 
 <div id="timeline">
 
-{dump}
-
+{*{snippet timelineList div , data-ajax-append, data-ajax-append-animate="fade"}*}
+<div n:snippet="timelineList" data-ajax-append>
 {foreach $days as $day}
 	{first}
 	{/first}
@@ -47,11 +47,11 @@
 							{/if}
 							<li>
 								{if $day['mood'] === 2}
-								<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
+									<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
 								{elseif $day['mood'] === 1}
-								<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
+									<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
 								{elseif $day['mood'] === 0}
-								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
+									<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
 								{/if}
 							</li>
 						</ul>
@@ -68,9 +68,9 @@
 						<ul class="timeline-panel-ul">
 							<li><span class="importo">{$day['end_time']|date:'%H:%M'}</span></li>
 							{if $day['end_time']}
-							{foreach $experiences[$day['id']] as $experience}
-								<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
-							{/foreach}
+								{foreach $experiences[$day['id']] as $experience}
+									<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
+								{/foreach}
 							{else}
 								{if $iterator->isFirst()}
 									<li><a n:href="evening:default">Ukončit den?</a></li>
@@ -86,7 +86,20 @@
 		</div>
 	</div>
 {/foreach}
+{*{/snippet}*}
 </div>
+
+</div>
+
+
+{snippet timelineListButton}
+<div n:if="$showMoreButton" class="row text-center">
+	<br>
+	<a n:href="list ($page + 1)" class="ajax btn btn-default">Load more</a>
+</div>
+{/snippet}
+
+
 
 {if empty($days)}
 	<div class="row">
