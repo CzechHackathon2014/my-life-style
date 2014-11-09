@@ -9,7 +9,7 @@ namespace app\FrontModule\presenters;
 use	Nette\Application\UI\Form,
     Nette\Utils\DateTime;
 
-class MorningPresenter extends BasePresenter
+class MorningPresenter extends DairyPresenter
 {
 
 	/**
@@ -23,6 +23,8 @@ class MorningPresenter extends BasePresenter
 		if ( $this->user->isLoggedIn() !== true ){
 			$this->redirect('homepage:default');
 		}
+
+		$this -> template -> next_action = array('label' => 'Začít nový den', 'action' => 'Morning:default');
 		
 		# deside if we wan't to display new day form or redirect to any other
 		# presenter
@@ -60,13 +62,17 @@ class MorningPresenter extends BasePresenter
 	{
 		$values = $form -> getValues();
 
-		# TODO: detect value for time
+		# detect value for time
+		$today = new DateTime;
 		$time = new DateTime;
+		if ($values['time_adjusted']){
+			$time = $time->from($today->format('Y-m-d ').$values['time']);
+		};
 
 		# do funny stuff and store to database
 
 		# we should be storing mood also
-		$this -> dayManager->startDay(1, $time, '1');
+		$this -> dayManager->startDay($this->user->id, $time, $values['mood']);
 
 		$this -> redirect('morning:howdy');
 	}

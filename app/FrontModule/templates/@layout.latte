@@ -8,57 +8,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{ifset #title}{include title|striptags} | {/ifset}My Life Style</title>
+	<title>{ifset #title}{include title|striptags} | {/ifset}My Life Style</title>
 
-    {if $production}
-        <link rel="stylesheet" href="{$basePath}/style/site/app.min.css?{$version}">
-    {else}
-        <!-- build:css {$basePath}/style/site/app.min.css -->
-        <link rel="stylesheet" href="{$basePath}/style/site/main.css">
-        <!-- endbuild -->
-    {/if}
+	{if $production}
+		<link rel="stylesheet" href="{$basePath}/style/site/app.min.css?{$version}">
+	{else}
+		<!-- build:css {$basePath}/style/site/app.min.css -->
+		<link rel="stylesheet" href="{$basePath}/style/site/main.css">
+		<!-- endbuild -->
+	{/if}
 	<!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
-    <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-    {block head}{/block}
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	{block head}{/block}
 </head>
 
 <body>
-    <script> document.documentElement.className+=' js' </script>
+	<script> document.documentElement.className+=' js' </script>
 
 	<div class="container">
 		<div class="header">
 			<ul class="nav nav-pills pull-right" role="tablist">
-		  		<li role="presentation" {ifCurrent Homepage:* }class="active"{/ifCurrent}><a n:href="Homepage:default">Úvod</a></li>
+				{if @$next_action}
+				<li role="presentation" {ifCurrent $next_action['action'] }class="active"{/ifCurrent}><a href="{link $next_action['action']}">{$next_action['label']}</a></li>
+				{/if}
 				{if !$user->isLoggedIn()}
 					<li role="presentation" {ifCurrent Sign:in }class="active"{/ifCurrent}><a n:href="Sign:in">Přihlásit se</a></li>
+					<li role="presentation" {ifCurrent About:* }class="active"{/ifCurrent}><a n:href="About:default">O projektu</a></li>
+					<li role="presentation" {ifCurrent Contact:* }class="active"{/ifCurrent}><a n:href="Contact:default">Kontakt</a></li>
 				{/if}
-				<li role="presentation" {ifCurrent About:* }class="active"{/ifCurrent}><a n:href="About:default">O projektu</a></li>
-				<li role="presentation" {ifCurrent Contact:* }class="active"{/ifCurrent}><a n:href="Contact:default">Kontakt</a></li>
 				{if $user->isLoggedIn()}
-					<li role="presentation" {ifCurrent Dashboard:* }class="active"{/ifCurrent}><a n:href="Dashboard:">Dashboard</a></li>
-					{if $user->identity->avatar}<li><a n:href="Dashboard:" style="padding:0"><img class="media-object dp img-circle" src="{$user->identity->avatar}" style="width: 40px;height:40px;"></a></li>{/if}
+					<li role="presentation" {ifCurrent Dashboard:* }class="active"{/ifCurrent}><a n:href="Dashboard:list">Deníček</a></li>
+					{if $user->identity->avatar}<li><a n:href="Dashboard:list" style="padding:0"><img class="media-object dp img-circle" src="{$user->identity->avatar}" style="width: 40px;height:40px;"></a></li>{/if}
 				{/if}
 			</ul>
 
 			{if $user->isLoggedIn()}
-				<a class="brand" n:href="Dashboard:"><h3 class="text-muted">My Life Style <small><span class="label label-info">beta</span></small></h3></a>
-           	{else}
+				<a class="brand" n:href="Dashboard:list"><h3 class="text-muted">My Life Style <small><span class="label label-info">beta</span></small></h3></a>
+			{else}
 				<a class="brand" n:href="Homepage:"><h3 class="text-muted">My Life Style <small><span class="label label-info">beta</span></small></h3></a>
-           	{/if}
-	  	</div>
+			{/if}
+		</div>
 
 		<div n:foreach="$flashes as $flash" class="alert flash {$flash->type} alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          {if $flash->type == 'error'}<strong>Warning!</strong>{/if} {$flash->message}.
-        </div>
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  {if $flash->type == 'error'}<strong>Warning!</strong>{/if} {$flash->message}.
+		</div>
 
 		{include content}
 
@@ -68,27 +70,29 @@
 			</div>
 			<div class="col-xs-6 text-right">
 				{if $user->isLoggedIn()}
-					<a n:href="UserSettings:password">Nastaveni</a> /
-					<a n:href="Sign:out">Logout</a>
+					<a n:href="Sign:out">Odhlásit</a> |
+					<a n:href="UserSettings:password">Nastavení</a> |
+					<a n:href="About:default">O projektu</a> |
+					<a n:href="Contact:default">Kontakt</a>
 				{/if}
 			</div>
-        </div>
+		</div>
 
 	</div>
 
 
 
-    {if $production}
-        <script src="{$basePath}/script/site/app.min.js?{$version}"></script>
-    {else}
-        <!-- build:js {$basePath}/script/site/app.min.js -->
+	{if $production}
+		<script src="{$basePath}/script/site/app.min.js?{$version}"></script>
+	{else}
+		<!-- build:js {$basePath}/script/site/app.min.js -->
 		<script src="{$basePath}/script/vendor/netteForms.js"></script>
 		<script src="{$basePath}/components/jquery/dist/jquery.js"></script>
 		<script src="{$basePath}/components/nette.ajax.js/nette.ajax.js"></script>
 		<script src="{$basePath}/components/bootstrap/js/alert.js"></script>
 		<script src="{$basePath}/script/site/main.js"></script>
-        <!-- endbuild -->
-    {/if}
-    {block scripts}{/block}
+		<!-- endbuild -->
+	{/if}
+	{block scripts}{/block}
 </body>
 </html>

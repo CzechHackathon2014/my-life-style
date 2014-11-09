@@ -1,25 +1,28 @@
 {*
     Dashboard : list
 *}
-
 {block content}
+
+{dump $next_action}
+
+{if !$next_action}
+	{if array_values($days)[0]['date']|date:'%Y-%m-%d' === $today}
+		Dnešní den je už uzavřený, počkej si zase na zítra!
+	{else}
+<div>
+<p>It is to early to start new day. Get some rest!</p>
+<p>But if you insist, you can <a n:href="Morning:default">start new day!</a></p>
+</div>
+	{/if}
+{/if}
 
 <div id="timeline">
 
 {dump}
 
-	<div class="row timeline-movement timeline-movement-top">
-		<div class="timeline-badge timeline-future-movement">
-			<a href="#">
-				<i class="fa fa-plus-circle"></i>
-			</a>
-		</div>
-		<div class="timeline-badge timeline-filter-movement">
-			<i class="fa fa-clock-o" style="color: black"></i>
-		</div>
-	</div>
-
 {foreach $days as $day}
+	{first}
+	{/first}
 	<div class="row timeline-movement">
 		<div class="timeline-badge">
 			<span class="timeline-balloon-date-day">{$day['date']|date:'%d'}</span>
@@ -33,17 +36,17 @@
 					<div class="timeline-panel left-side">
 						<ul class="timeline-panel-ul">
 							<li><span class="importo">{$day['start_time']|date:'%H:%M'}</span></li>
-							{if @$sleep_time[$day['id']]}
-								<li>spal jsi $sleep_time[$day['id']] hodin a probudil jsi se </li>
+							{if $slept[$day['id']]}
+								<li>Spal jsi $sleept[$day['id']] hodin</li>
 							{else}
 								<li>Po probuzení ses cítil</li>
 							{/if}
 							<li>
-								{if $day['mood'] === 1}
+								{if $day['mood'] === 2}
 								<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
-								{elseif $day['mood'] === 2}
+								{elseif $day['mood'] === 1}
 								<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
-								{elseif $day['mood'] === 3}
+								{elseif $day['mood'] === 0}
 								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
 								{/if}
 							</li>
@@ -63,6 +66,13 @@
 							{foreach $experiences[$day['id']] as $experience}
 								<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
 							{/foreach}
+							{if count($experiences[$day['id']]) === 0}
+								{if $iterator->isFirst()}
+									<li><a n:href="evening:default">Ukončit den?</a></li>
+								{else}
+									Tento den již nelze uzavřít hodnotit.
+								{/if}
+							{/if}
 						</ul>
 					</div>
 
@@ -72,3 +82,17 @@
 	</div>
 {/foreach}
 </div>
+
+{if empty($days)}
+	<div>
+		<p>Welcome screen</p>
+		<ul>
+		<li>
+		<a n:href="Morning:default">Začnu ránem</a>
+		</li>
+		<li>
+		<a n:href="Evening:default">Chci začít zhodnocením dnešního dne</a>
+		</li>
+		</ul>
+	</div>
+{/if}
