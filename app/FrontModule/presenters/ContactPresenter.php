@@ -34,14 +34,14 @@ class ContactPresenter extends BasePresenter
 		// email fake
 		$form->addText('email', '');
 		// Name
-		$form->addText('name', 'Name:');
+		$form->addText('name', 'Jméno nebo přezdívka:');
 		// Email
-		$form->addText('liame', 'E-mail or phone:')
+		$form->addText('liame', 'Email nebo telefon:')
 			->setRequired('Please enter Your email or phone number');
 		// Message
-		$form->addTextArea('note', 'Your message:');
+		$form->addTextArea('note', 'Vaše zpráva:');
 		//Button
-		$form->addSubmit('actionSend', 'Send form');
+		$form->addSubmit('actionSend', 'Odeslat');
 
 		$form->onSuccess[] = callback($this, 'saveContactForm');
 
