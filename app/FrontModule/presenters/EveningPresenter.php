@@ -65,23 +65,28 @@ class EveningPresenter extends DairyPresenter
 		$values = $form -> getValues();
 
 		if ( $values['time_adjusted'] ){
-			$store_time = $values['time'];
+			$end_time = $values['time'];
 		} else {
-			$store_time = new DateTime();
+			$end_time = new DateTime();
 		}
 
 		$experiences = array(
 			$values['experience_1'], $values['experience_2'], $values['experience_3'],
 		);
 
-		$last = $this-> dayManager -> findAllDaysForUser($this->user->id)->order('date DESC')->limit(1)->fetch();
-		$store_time = $last->date;
+		$last = $this-> dayManager -> findAllDaysForUser($this->user->id)->order('date DESC')->limit(1);
+		if (count($last) == 0){
+			$store_time = new DateTime();
+		} else {
+			$last->fetch();
+			$store_time = $last->date;
+		}
 		
 		
 		# evaluate the day, we should always have the beginning
 		# $this -> dayManager->startDay(1, $values['mood'])
 		$this -> dayManager -> evaluateDay($this->user->id, $store_time, $experiences);
-		$this -> dayManager -> endDay($this->user->id, $store_time);
+		$this -> dayManager -> endDay($this->user->id, $store_time, $end_time);
 
 		$this -> redirect('evening:sleeptime');
 	}

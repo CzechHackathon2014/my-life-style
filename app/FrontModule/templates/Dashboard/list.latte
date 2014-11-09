@@ -39,7 +39,11 @@
 							{if $slept[$day['id']]}
 								<li>Spal jsi $sleept[$day['id']] hodin</li>
 							{else}
+								{if $day['start_time']}
 								<li>Po probuzení ses cítil</li>
+								{else}
+								<li>Vstávání nezaznamenáno</li>
+								{/if}
 							{/if}
 							<li>
 								{if $day['mood'] === 2}
@@ -70,7 +74,7 @@
 								{if $iterator->isFirst()}
 									<li><a n:href="evening:default">Ukončit den?</a></li>
 								{else}
-									Tento den již nelze uzavřít hodnotit.
+									Tento den již nelze uzavřít a hodnotit.
 								{/if}
 							{/if}
 						</ul>

@@ -148,7 +148,7 @@ class DayManager extends Nette\Object
 	 * @param DateTime $timeStamp
 	 * @return boolean
 	 */
-	public function endDay($userId, $day) {
+	public function endDay($userId, $day, $end_time) {
 		
 		$where = array(
 				'user_id' => $userId,
@@ -156,7 +156,7 @@ class DayManager extends Nette\Object
 			);
 
 		$update = array(
-				'end_time' => $day->format('Y-m-d H:i:s')
+				'end_time' => $end_time,
 			);
 
 		$this->repository->table()->where($where)->update($update);
