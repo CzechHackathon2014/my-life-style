@@ -44,6 +44,7 @@ class FacebookUserManager extends Nette\Object
 			'facebook_id' => $user->facebook_id,
 			'email' => $user->email,
 			'role' => $user->role,
+			'loggedViaFacebook' => TRUE,
 			'avatar' => $user->avatar,
 		]);
 
@@ -75,6 +76,7 @@ class FacebookUserManager extends Nette\Object
 			'name' => $name,
 			'active' => '1',
 			'role' => 'user',
+			'loggedViaFacebook' => TRUE,
 			'avatar' => 'https://graph.facebook.com/'.$userFacebookId.'/picture',
 		);
 
