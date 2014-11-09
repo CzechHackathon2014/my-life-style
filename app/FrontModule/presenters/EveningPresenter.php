@@ -66,7 +66,7 @@ class EveningPresenter extends DiaryPresenter
 
 		$today = new DateTime;
 		$time = new DateTime;
-		$time = $time->from($today->format('Y-m-d ').$values['time']);
+		$end_time = $time->from($today->format('Y-m-d ').$values['time']);
 
 		$experiences = array(
 			$values['experience_1'], $values['experience_2'], $values['experience_3'],
