@@ -50,9 +50,11 @@ class MorningPresenter extends DiaryPresenter
 
 		$form -> addHidden('time_adjusted');
 		$form -> addSelect('mood', 'Moje nálada po ránu', $moods)->setDefaultValue(2)->addCondition(Form::IS_IN, array(0,1,2));
-		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'));
+		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'))->setOption('class', 'time');
 
-		$form -> addSubmit('submitMorning', 'submit');
+		$form -> addSubmit('submitMorning0', ':(');
+		$form -> addSubmit('submitMorning1', ':|');
+		$form -> addSubmit('submitMorning2', ':)');
 
 		$form -> onSuccess[] = callback($this, 'saveMorningForm');
 
@@ -62,6 +64,15 @@ class MorningPresenter extends DiaryPresenter
 	public function saveMorningForm(Form $form)
 	{
 		$values = $form -> getValues();
+		if ($form['submitMorning0']->submittedBy) {
+			$mood = 0;
+		}
+		if ($form['submitMorning1']->submittedBy) {
+			$mood = 1;
+		}
+		if ($form['submitMorning2']->submittedBy) {
+			$mood = 2;
+		}
 
 		# detect value for time
 		$today = new DateTime;
@@ -73,7 +84,7 @@ class MorningPresenter extends DiaryPresenter
 		# do funny stuff and store to database
 
 		# we should be storing mood also
-		$this -> dayManager->startDay($this->user->id, $time, $values['mood']);
+		$this -> dayManager->startDay($this->user->id, $time, $mood);
 
 		$this -> redirect('morning:howdy');
 	}
