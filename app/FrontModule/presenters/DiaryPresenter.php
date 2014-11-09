@@ -12,7 +12,7 @@ use Nette,
 /**
  * Base presenter for all application presenters.
  */
-abstract class DairyPresenter extends BasePresenter
+abstract class DiaryPresenter extends BasePresenter
 {
 	/**
 	 * @var \App\Model\DayManager @inject

@@ -67,10 +67,11 @@
 					<div class="timeline-panel right-side">
 						<ul class="timeline-panel-ul">
 							<li><span class="importo">{$day['experience_time']|date:'%H:%M'}</span></li>
+							{if $day['experience_time']}
 							{foreach $experiences[$day['id']] as $experience}
 								<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
 							{/foreach}
-							{if count($experiences[$day['id']]) === 0}
+							{else}
 								{if $iterator->isFirst()}
 									<li><a n:href="evening:default">Ukončit den?</a></li>
 								{else}

@@ -9,7 +9,7 @@ namespace app\FrontModule\presenters;
 use	Nette\Application\UI\Form,
     Nette\Utils\DateTime;
 
-class MorningPresenter extends DairyPresenter
+class MorningPresenter extends DiaryPresenter
 {
 
 	/**
@@ -49,7 +49,7 @@ class MorningPresenter extends DairyPresenter
 		$form = new Form();
 
 		$form -> addHidden('time_adjusted');
-		$form -> addSelect('mood', 'Moje nálada po ránu', $moods)->addCondition(Form::IS_IN, array(0,1,2));
+		$form -> addSelect('mood', 'Moje nálada po ránu', $moods)->setDefaultValue(2)->addCondition(Form::IS_IN, array(0,1,2));
 		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'));
 
 		$form -> addSubmit('submitMorning', 'submit');
