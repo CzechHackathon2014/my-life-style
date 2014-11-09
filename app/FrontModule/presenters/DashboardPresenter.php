@@ -94,6 +94,12 @@ class DashboardPresenter extends DiaryPresenter
 		$this -> template -> slept = $slept;
 		$this -> template -> now = $now;
 		$this -> template -> today = $now->format('Y-m-d');
+
+
+		if ($this->isAjax()){
+			$this->redrawControl('timelineList');
+			$this->redrawControl('timelineListButton');
+		}
 	}
 
 	public function renderDetail($date)

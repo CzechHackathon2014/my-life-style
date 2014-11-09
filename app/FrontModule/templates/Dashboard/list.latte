@@ -18,6 +18,8 @@
 
 <div id="timeline">
 
+{*{snippet timelineList div , data-ajax-append, data-ajax-append-animate="fade"}*}
+<div n:snippet="timelineList" data-ajax-append>
 {foreach $days as $day}
 	{first}
 	{/first}
@@ -84,12 +86,19 @@
 		</div>
 	</div>
 {/foreach}
+{*{/snippet}*}
 </div>
 
+</div>
+
+
+{snippet timelineListButton}
 <div n:if="$showMoreButton" class="row text-center">
 	<br>
-	<a n:href="list ($page + 1)" class="btn btn-default">Load more</a>
+	<a n:href="list ($page + 1)" class="ajax btn btn-default">Load more</a>
 </div>
+{/snippet}
+
 
 
 {if empty($days)}
