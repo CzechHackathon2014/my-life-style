@@ -10,31 +10,31 @@
                     {form eveningForm}
                     <div class="hide"><input type="text" class="text" n:name="time_adjusted" /></div>
                     <div class="form__header">
-                        <h2>Evening form</h2>
+                        <h2>Napiš 3 věci které tě potěšily</h2>
                     </div>
-                    <div class="form__body">
+                    <div class="form__body row">
                         <div class="form__line">
                             {label experience_1 /}
-                            <div class="input-field">{input experience_1}</div>
+                            <div class="input-field">{input experience_1 class => "form-control"}</div>
                         </div>
 
                         <div class="form__line">
                             {label experience_2 /}
-                            <div class="input-field">{input experience_2}</div>
+                            <div class="input-field">{input experience_2 class => "form-control"}</div>
                         </div>
 
                         <div class="form__line">
                             {label experience_3 /}
-                            <div class="input-field">{input experience_3}</div>
+                            <div class="input-field">{input experience_3 class => "form-control"}</div>
                         </div>
 
                         <div class="form__line">
                             {label time /}
-                            <div class="input-field">{input time}</div>
+                            <div class="input-field">{input time class => "form-control"}</div>
                         </div>
 
-                        <div>
-                            {input submitEvening class=>"button"}
+                        <div class="col-xs-12 text-center">
+                            {input submitEvening class=>"button btn "}
                         </div>
                     </div>
                 {/form}
