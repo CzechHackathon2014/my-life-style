@@ -65,7 +65,7 @@ class DashboardPresenter extends DiaryPresenter
 		$this->page = $page;
 
 		$paginator = new Paginator();
-		$paginator->setItemsPerPage(10);
+		$paginator->setItemsPerPage(7);
 		$paginator->setPage($this->page);
 		$count = $this->dayManager->getCountDays($this->user->id);
 		$paginator->setItemCount($count);
