@@ -7,7 +7,7 @@
 
 {if !$next_action}
 	{if array_values($days)[0]['date']|date:'%Y-%m-%d' === $today}
-		Dnešní den je už uzavřený, počkej si zase na zítra!
+		Dnešní den je už uzavřený, počkej na zítra ;)
 	{else}
 <div>
 <p>It is to early to start new day. Get some rest!</p>
@@ -103,7 +103,7 @@
 
 {if empty($days)}
 	<div class="row">
-		<p>Welcome screen</p>
+		<h2>Vítej</h2>
 		<div class="col-xs-12 text-center">
 		<a n:href="Morning:default" class="btn btn-default btn-lg">Začnu ránem</a>
 		</div>
