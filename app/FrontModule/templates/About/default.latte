@@ -3,34 +3,39 @@
 *}
 
 {block #content}
-	<h1>About My Life Style</h1>
+	<h1>My life Style - Deníček duševní hygieny.</h1>
 
+	<div class="row marketing">
+	<div class="col-lg-12">
+		<p>Aplikace určená pro holky a kluky, kterým není putna kvalita jejich života.</p>
+		<p>Poslouží vám jako deníček duševní hygieny, kterému budete důvěřovat.</p>
+		<p>Nechte se unést intuitivními funkcemi pro zadání 3 pozitivních věcí, které se za celý den udály. Poté akorát doplňte o čas v kolik hodin jste šli spát a kdy vstali.</p>
+
+		<p>Je vědecky prokázáno, ze stačí pouhých 20 dnů  a budete se cítit o mnoho lépe než kdy dříve.</p>
+		</div>
+	</div>
+
+{if false}
   <div class="row marketing">
+  	<h2>FAQ</h2>
 	<div class="col-lg-6">
-	  <h4>Subheading</h4>
+	  <h4>Jak se přihlásit?</h4>
 	  <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-	  <h4>Subheading</h4>
-	  <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-	  <h4>Subheading</h4>
-	  <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
 	</div>
 
 	<div class="col-lg-6">
-	  <h4>Subheading</h4>
+	  <h4>Jak?</h4>
 	  <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-	  <h4>Subheading</h4>
-	  <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-	  <h4>Subheading</h4>
-	  <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
 	</div>
   </div>
+{/if}
 
   <div class="row">
   	<div class="col-lg-12">
+  			{if $user->isLoggedIn()}
+			<p><a class="btn btn-lg btn-primary" n:href="Dashboard:list" role="button">Pokračovat na deníček</a></p>
+  			{else}
   			<p><a class="btn btn-lg btn-success" n:href="Sign:up" role="button">Registrujte se</a></p>
+  			{/if}
   	</div>
   </div>
