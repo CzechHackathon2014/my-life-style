@@ -69,7 +69,7 @@
 							<li><span class="importo">{$day['end_time']|date:'%H:%M'}</span></li>
 							{if $day['end_time']}
 								{foreach $experiences[$day['id']] as $experience}
-									<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
+									<li><i class="fa fa-comment-o"></i> {$experience['description']}<li>
 								{/foreach}
 							{else}
 								{if $iterator->isFirst()}
