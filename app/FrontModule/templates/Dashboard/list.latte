@@ -45,11 +45,11 @@
 							{/if}
 							<li>
 								{if $day['mood'] === 2}
-								<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
+									<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
 								{elseif $day['mood'] === 1}
-								<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
+									<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
 								{elseif $day['mood'] === 0}
-								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
+									<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
 								{/if}
 							</li>
 						</ul>
@@ -66,9 +66,9 @@
 						<ul class="timeline-panel-ul">
 							<li><span class="importo">{$day['experience_time']|date:'%H:%M'}</span></li>
 							{if $day['experience_time']}
-							{foreach $experiences[$day['id']] as $experience}
-								<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
-							{/foreach}
+								{foreach $experiences[$day['id']] as $experience}
+									<li><i class="fa fa-comment-o"></i> {$experience['description']}<li>
+								{/foreach}
 							{else}
 								{if $iterator->isFirst()}
 									<li><a n:href="evening:default">Ukončit den?</a></li>
