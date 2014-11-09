@@ -71,7 +71,11 @@
 			<div class="col-xs-12 col-sm-6 text-right">
 				{if $user->isLoggedIn()}
 					<a n:href="Sign:out">Odhlásit</a> |
-					<a n:href="UserSettings:password">Nastavení</a> |
+					{ifset $user->identity->loggedViaFacebook}
+						<span style="color:silver">Nastavení</span> |
+					{else}
+						<a n:href="UserSettings:password">Nastavení</a> |
+					{/ifset}
 					<a n:href="About:default">O projektu</a> |
 					<a n:href="Contact:default">Kontakt</a>
 				{/if}
