@@ -48,7 +48,7 @@ class MorningPresenter extends DiaryPresenter
 
 		$form = new Form();
 
-		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'));
+		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'))->addRule(Form::PATTERN, 'Zadej čas (10, 10:00)', "^[0-9]{1,2}(:[0-9]{2})?$");
 		$form -> addSubmit('submitMorning0', ':(');
 		$form -> addSubmit('submitMorning1', ':|');
 		$form -> addSubmit('submitMorning2', ':)');
@@ -74,8 +74,8 @@ class MorningPresenter extends DiaryPresenter
 		# detect value for time
 		$today = new DateTime;
 		$time = new DateTime;
-		$time = $time->from($today->format('Y-m-d ').$values['time']);
 
+		$time = $time->from($today->format('Y-m-d ').(strpos($values['time'],':') ? ($values['time']) : ($values['time'].':00')));
 
 		# do funny stuff and store to database
 
