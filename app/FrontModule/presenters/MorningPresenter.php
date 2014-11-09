@@ -49,7 +49,6 @@ class MorningPresenter extends DiaryPresenter
 		$form = new Form();
 
 		$form -> addHidden('time_adjusted');
-		$form -> addSelect('mood', 'Moje nálada po ránu', $moods)->setDefaultValue(2)->addCondition(Form::IS_IN, array(0,1,2));
 		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'))->setOption('class', 'time');
 
 		$form -> addSubmit('submitMorning0', ':(');
