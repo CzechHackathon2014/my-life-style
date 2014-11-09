@@ -1,22 +1,20 @@
-Aprila Sandbox
-=======================
+MyLifeStyle - open edition
+==========================
 
-It's bundle of basic functionality, which you need to start your next project with administration.
+it's application for save your day activity
+
+Status: executable without tests
 
 
-Status: dev version
+We prepare this application on CzechHackathon event.
 
+Who is we?
 
-Admin
- - user authentication (login, password reset)
- - user manager (create new users)
- - reference manager (simple example for inspiration)
-
-Frontend
- - homepage (yes)
- - references (list of references)
- - contact (send me email)
-
+Honza Cerny https://github.com/chemix
+Martin Surovcak https://github.com/msurovcak
+Martin Chapcak  https://github.com/manfm
+Jakub Bouček https://github.com/jakubboucek
+David Pavliska http://pavliska.com
 
 
 Installation
@@ -24,9 +22,7 @@ Installation
 
 ### 1) Clone code from GitHub
 
-clone repository `git clone git@github.com:Aprila/sandbox.git`
-
-TODO: use composer
+clone repository `git clone git@github.com:CzechHackathon2014/my-life-style.git`
 
 
 ### 2) Composer
@@ -43,35 +39,31 @@ write for folders log and temp
 
 `$ chmod -R a+rw temp log`
 
-and for data
-
-`$ chmod -R a+rw www/data`
-
 
 ### 4) SQL
 
-init SQL for users from `vendor/others/Aprila/Model/db/users.sql`
-
-and for references from `app/model/db/init.sql`
+init SQL from `app/model/db/init.sql`
 
 
 ### 5) Apache
 
 update your file `etc/hosts` and add new line
 
-`127.0.0.1 aprila-sandbox.l`
+`127.0.0.1 mylifestyle.local`
 
 apache/virtuals-list
 
 ```
 <VirtualHost *:80>
-    DocumentRoot "/Sites/aprila-sandbox/www/
-    ServerName aprila-sandbox.l
-    ServerAlias aprila-sandbox.192.168.1.111.xip.io
+    DocumentRoot "/Sites/mylifestyle/www/
+    ServerName mylifestyle.local
+    ServerAlias mylifestyle.192.168.1.111.xip.io
 </VirtualHost>
 ```
 
+### 5) Facebook
 
+register new Facebook app and update configuration in app/config/config.local.neon
 
 
 
@@ -104,6 +96,10 @@ autocompile
 `grunt watch`
 
 
+### Bower
+
+yes, we user bower, but for easy development process, we save components to git repository
+
 
 ### Tests
 
@@ -114,11 +110,14 @@ run Nette\Tester `vendor/bin/tester tests`
 or way with helper file, create in root folder new file "run_tests"
 
 for example if You use XAMPP on Mac:
+
 ```
 #! /bin/bash
 vendor/bin/tester tests -w tests -p /Applications/XAMPP/bin/php
 ```
-or
+
+or with watch whole application
+
 ```
 #! /bin/bash
 vendor/bin/tester tests -w ./ -p /Applications/XAMPP/bin/php

@@ -3,23 +3,32 @@
 *}
 
 {block #content}
-
+<h1>Kontakt - Napište nám</h1>
+<p>Máte nějaký dotaz, poznámku nebo nám jednuduše chcete říct, jak moc lepší je váš život díky MyLifeStyle?</p>
 {form contactForm}
+	<ul class=error n:if="$form->ownErrors">
+		<li n:foreach="$form->ownErrors as $error">{$error}</li>
+	</ul>
+
 	<div class="row">
 		<div class="col-md-6">
+
 			<div class="form-group">
-				{label name /}
+				{label name class=>"control-label" /}
 				{input name class=>"form-control"}
+				<span class="help-block error" n:ifcontent>{inputError name}</span>
 			</div>
 			<div class="form-group">
-				{label liame /}
-                {input name class=>"form-control"}
+				{label liame class=>"control-label" /}
+                {input liame class=>"form-control"}
+                <span class="help-block error" n:ifcontent>{inputError liame}</span>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
-				{label note /}
+				{label note class=>"control-label" /}
 				{input note cols => 40, rows => 10, class=>"form-control"}
+				<span class="help-block error" n:ifcontent>{$form[note]->error}</span>
 			</div>
 		</div>
 		<div class="col-md-12">

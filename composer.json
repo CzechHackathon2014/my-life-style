@@ -19,7 +19,6 @@
         "php": ">= 5.4",
         "nette/nette": "~2.2",
         "aprila/aprila": "~0.1",
-        "dg/adminer-custom": "~1.0",
         "kdyby/facebook": "~1.2"
     },
     "require-dev": {

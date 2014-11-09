@@ -63,8 +63,16 @@ class DayManager extends Nette\Object
 				'date'    => $day->format('Y-m-d')
 			);
 
-		$ret = $this->repository->table()->where($where)->fetch()->toArray();
-		return $ret['id'];
+		$ret = $this->repository->table()->where($where)->fetch();
+		if (!$ret){
+			# we'reending new day, looks like there is no beggining
+			# TODO if this happens before 5 there is a great chance that this is a yestaday's end!
+			$this->createNew($userId,$day);
+			return $this->getUserDayId($userId, $day);
+		} else {
+			$ret = $ret->toArray();
+			return $ret['id'];
+		}
 	}
 	
 	/**
@@ -122,7 +130,7 @@ class DayManager extends Nette\Object
 		$this->repository->table()->where($where)->update($update);
 
 		# add experiences - at first get `day_id`
-		$day_id = $this->getUserDayId(1, $now);
+		$day_id = $this->getUserDayId($userId, $day);
 
 		foreach ($notes as $note) {
 			$insert = array(
@@ -140,7 +148,7 @@ class DayManager extends Nette\Object
 	 * @param DateTime $timeStamp
 	 * @return boolean
 	 */
-	public function endDay($userId, $day) {
+	public function endDay($userId, $day, $end_time) {
 		
 		$where = array(
 				'user_id' => $userId,
@@ -148,11 +156,21 @@ class DayManager extends Nette\Object
 			);
 
 		$update = array(
-				'end_time' => $day->format('Y-m-d H:i:s')
+				'end_time' => $end_time,
 			);
 
 		$this->repository->table()->where($where)->update($update);
 
+	}
+
+
+	/**
+	 * @param int $userId
+	 * @return int
+	 */
+	public function getCountDays($userId = 0)
+	{
+		return (int) $this->repository->getCountDaysForUser($userId);
 	}
 
 }

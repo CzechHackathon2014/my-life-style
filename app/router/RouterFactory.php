@@ -22,9 +22,6 @@ class RouterFactory
 	public function createRouter()
 	{
 		$router = new RouteList();
-		// Admin
-		$router[] = $adminRouter = new RouteList('Admin');
-		$adminRouter[] = new Route('aprila/<presenter>/<action>', 'Dashboard:default');
 
 		// Front
 		$router[] = $frontRouter = new RouteList('Front');

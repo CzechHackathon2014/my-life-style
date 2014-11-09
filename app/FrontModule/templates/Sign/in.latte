@@ -7,6 +7,14 @@
 
 <div class="row">
 	<div class="col-sm-6">
+		<div class="text-center">
+		<a n:href="fbLogin-open!" class="btn-facebook"><i class="fa fa-facebook-square"></i> Login using facebook</a>
+		<br>
+		<br>
+		or
+		<br>
+		<br>
+		</div>
 		<div class="well">
 			{form signForm-form}
 		  		<ul class=error n:if="$form->ownErrors">
@@ -37,18 +45,16 @@
 		  </div>
 	  </div>
 	  <div class="col-sm-6">
-		  <p class="lead">Register now for <span class="text-success">FREE</span></p>
+		  <p class="lead">Zaregistruj se, je to <span class="text-success">FREE</span></p>
 		  <ul class="list-unstyled" style="line-height: 2">
-			  <li><span class="fa fa-check text-success"></span> See all your orders</li>
-			  <li><span class="fa fa-check text-success"></span> Fast re-order</li>
-			  <li><span class="fa fa-check text-success"></span> Save your favorites</li>
-			  <li><span class="fa fa-check text-success"></span> Fast checkout</li>
-			  <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
-			  <li><a n:href="About:"><u>Read more</u></a></li>
+			  <li><span class="fa fa-check text-success"></span> Neomezený přístup</li>
+			  <li><span class="fa fa-check text-success"></span> Přehledný timeline</li>
+			  <li><span class="fa fa-check text-success"></span> Technická Podpora</li>
+			  <li><span class="fa fa-check text-success"></span> Zkvalitnění života</li>
+			  {*<li><a n:href="About:"><u>více</u></a></li>*}
 		  </ul>
-		  <p><a n:href="Sign:up" class="btn btn-info btn-block">Yes please, register now!</a></p>
+		  <p><a n:href="Sign:up" class="btn btn-info btn-block">Chci se registrovat</a></p>
 
-		  <br><br><a n:href="fbLogin-open!">Login using facebook</a>
 
 	  </div>
   </div>

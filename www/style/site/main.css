@@ -6958,6 +6958,21 @@ body {
 .brand:hover {
   text-decoration: none;
 }
+.btn-facebook {
+  background: #3b5998;
+  color: white;
+  font-size: 18px;
+  padding: 5px 12px 6px 8px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+}
+.btn-facebook:hover,
+.btn-facebook:focus,
+.btn-facebook:active {
+  border: 2px solid black;
+  color: white;
+  text-decoration: none;
+}
 .flash.info {
   background: lightgreen;
   color: #002200;
@@ -7003,6 +7018,7 @@ body {
 }
 #timeline .timeline-badge span.timeline-balloon-date-day {
   font-size: 1.4em;
+  display: block;
 }
 #timeline .timeline-badge span.timeline-balloon-date-month {
   font-size: .7em;

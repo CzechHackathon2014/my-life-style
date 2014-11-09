@@ -1,3 +1,3 @@
-addEvent('domready', function() {
-
+$(function () {
+    $.nette.init();
 });

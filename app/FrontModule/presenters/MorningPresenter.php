@@ -9,7 +9,7 @@ namespace app\FrontModule\presenters;
 use	Nette\Application\UI\Form,
     Nette\Utils\DateTime;
 
-class MorningPresenter extends BasePresenter
+class MorningPresenter extends DiaryPresenter
 {
 
 	/**
@@ -23,6 +23,8 @@ class MorningPresenter extends BasePresenter
 		if ( $this->user->isLoggedIn() !== true ){
 			$this->redirect('homepage:default');
 		}
+
+		$this -> template -> next_action = array('label' => 'Začít nový den', 'action' => 'Morning:default');
 		
 		# deside if we wan't to display new day form or redirect to any other
 		# presenter
@@ -42,14 +44,14 @@ class MorningPresenter extends BasePresenter
 	{
 
 		$moods = array(0 => ':(', 1 => ':|', 2 => ':)');
+		$now   = new DateTime;
 
 		$form = new Form();
 
-		$form -> addHidden('time_adjusted');
-		$form -> addSelect('mood', 'Mood', $moods)->addCondition(Form::IS_IN, array(0,1,2));
-		$form -> addText('time');
-
-		$form -> addSubmit('submitMorning', 'submit');
+		$form -> addText('time', 'Vstal jsem v')->setDefaultValue($now->format('H:i'))->addRule(Form::PATTERN, 'Zadej čas (10, 10:00)', "^[0-9]{1,2}(:[0-9]{2})?$");
+		$form -> addSubmit('submitMorning0', ':(');
+		$form -> addSubmit('submitMorning1', ':|');
+		$form -> addSubmit('submitMorning2', ':)');
 
 		$form -> onSuccess[] = callback($this, 'saveMorningForm');
 
@@ -59,14 +61,26 @@ class MorningPresenter extends BasePresenter
 	public function saveMorningForm(Form $form)
 	{
 		$values = $form -> getValues();
+		if ($form['submitMorning0']->submittedBy) {
+			$mood = 0;
+		}
+		if ($form['submitMorning1']->submittedBy) {
+			$mood = 1;
+		}
+		if ($form['submitMorning2']->submittedBy) {
+			$mood = 2;
+		}
 
-		# TODO: detect value for time
+		# detect value for time
+		$today = new DateTime;
 		$time = new DateTime;
+
+		$time = $time->from($today->format('Y-m-d ').(strpos($values['time'],':') ? ($values['time']) : ($values['time'].':00')));
 
 		# do funny stuff and store to database
 
 		# we should be storing mood also
-		$this -> dayManager->startDay(1, $time, '1');
+		$this -> dayManager->startDay($this->user->id, $time, $mood);
 
 		$this -> redirect('morning:howdy');
 	}

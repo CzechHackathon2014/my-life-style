@@ -44,6 +44,7 @@ class FacebookUserManager extends Nette\Object
 			'facebook_id' => $user->facebook_id,
 			'email' => $user->email,
 			'role' => $user->role,
+			'loggedViaFacebook' => TRUE,
 			'avatar' => $user->avatar,
 		]);
 
@@ -55,11 +56,24 @@ class FacebookUserManager extends Nette\Object
 	{
 		$userFacebookId;
 
+		if (!isset($me->email)){
+			$email = $userFacebookId.'@user.from.facebook';
+		} else {
+			$email = $me->email;
+		}
+
+		if (!isset($me->name)){
+			$name = "Mr. Noname";
+		} else {
+			$name = $me->name;
+		}
+
+
 		$newUser = array(
 			'facebook_id' => $userFacebookId,
-			'username' => $me->email,
-			'email' => $me->email,
-			'name' => $me->name,
+			'username' => $email,
+			'email' => $email,
+			'name' => $name,
 			'active' => '1',
 			'role' => 'user',
 			'avatar' => 'https://graph.facebook.com/'.$userFacebookId.'/picture',
@@ -75,6 +89,7 @@ class FacebookUserManager extends Nette\Object
 				$actualUser = $this->database->table('users')->where('email', $me->email)->fetch();
 
 				$actualUser->update(['facebook_id'=> $userFacebookId]);
+
 				if ($actualUser->avatar == ''){
 					$actualUser->update(['avatar'=> $newUser['avatar']]);
 				}
@@ -98,6 +113,7 @@ class FacebookUserManager extends Nette\Object
 			'email' => $user->email,
 			'role' => $user->role,
 			'avatar' => $user->avatar,
+			'loggedViaFacebook' => TRUE,
 		]);
 
 		return $userEntity;

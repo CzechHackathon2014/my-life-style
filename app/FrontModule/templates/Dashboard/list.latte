@@ -1,25 +1,28 @@
 {*
     Dashboard : list
 *}
-
 {block content}
+
+{dump $next_action}
+
+{if !$next_action}
+	{if array_values($days)[0]['date']|date:'%Y-%m-%d' === $today}
+		Dnešní den je už uzavřený, počkej na zítra ;)
+	{else}
+<div>
+<p>It is to early to start new day. Get some rest!</p>
+<p>But if you insist, you can <a n:href="Morning:default">start new day!</a></p>
+</div>
+	{/if}
+{/if}
 
 <div id="timeline">
 
-{dump}
-
-	<div class="row timeline-movement timeline-movement-top">
-		<div class="timeline-badge timeline-future-movement">
-			<a href="#">
-				<i class="fa fa-plus-circle"></i>
-			</a>
-		</div>
-		<div class="timeline-badge timeline-filter-movement">
-			<i class="fa fa-clock-o" style="color: black"></i>
-		</div>
-	</div>
-
+{*{snippet timelineList div , data-ajax-append, data-ajax-append-animate="fade"}*}
+<div n:snippet="timelineList" data-ajax-append>
 {foreach $days as $day}
+	{first}
+	{/first}
 	<div class="row timeline-movement">
 		<div class="timeline-badge">
 			<span class="timeline-balloon-date-day">{$day['date']|date:'%d'}</span>
@@ -33,18 +36,22 @@
 					<div class="timeline-panel left-side">
 						<ul class="timeline-panel-ul">
 							<li><span class="importo">{$day['start_time']|date:'%H:%M'}</span></li>
-							{if @$sleep_time[$day['id']]}
-								<li>spal jsi $sleep_time[$day['id']] hodin a probudil jsi se </li>
+							{if $slept[$day['id']]}
+								<li>Spal jsi $sleept[$day['id']] hodin</li>
 							{else}
+								{if $day['start_time']}
 								<li>Po probuzení ses cítil</li>
+								{else}
+								<li>Vstávání nezaznamenáno</li>
+								{/if}
 							{/if}
 							<li>
-								{if $day['mood'] === 1}
-								<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
-								{elseif $day['mood'] === 2}
-								<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
-								{elseif $day['mood'] === 3}
-								<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
+								{if $day['mood'] === 2}
+									<i class="fa fa-smile-o fa-3x" style="color: silver"></i>
+								{elseif $day['mood'] === 1}
+									<i class="fa fa-meh-o fa-3x" style="color: silver"></i>
+								{elseif $day['mood'] === 0}
+									<i class="fa fa-frown-o fa-3x" style="color: silver"></i>
 								{/if}
 							</li>
 						</ul>
@@ -59,10 +66,18 @@
 				<div class="col-sm-offset-1 col-sm-11">
 					<div class="timeline-panel right-side">
 						<ul class="timeline-panel-ul">
-							<li><span class="importo">{$day['experience_time']|date:'%H:%M'}</span></li>
-							{foreach $experiences[$day['id']] as $experience}
-								<li><i class="fa fa-comment-o"></i>{$experience['description']}<li>
-							{/foreach}
+							<li><span class="importo">{$day['end_time']|date:'%H:%M'}</span></li>
+							{if $day['end_time']}
+								{foreach $experiences[$day['id']] as $experience}
+									<li><i class="fa fa-comment-o"></i> {$experience['description']}<li>
+								{/foreach}
+							{else}
+								{if $iterator->isFirst()}
+									<li><a n:href="evening:default">Ukončit den?</a></li>
+								{else}
+									Tento den již nelze uzavřít a hodnotit.
+								{/if}
+							{/if}
 						</ul>
 					</div>
 
@@ -71,4 +86,32 @@
 		</div>
 	</div>
 {/foreach}
+{*{/snippet}*}
 </div>
+
+</div>
+
+
+{snippet timelineListButton}
+<div n:if="$showMoreButton" class="row text-center">
+	<br>
+	<a n:href="list ($page + 1)" class="ajax btn btn-default">Load more</a>
+</div>
+{/snippet}
+
+
+
+{if empty($days)}
+	<div class="row">
+		<h2>Vítej v MyLifeStyle</h2>
+		<p>
+			Jsi tu poprvé, a tak se rozhodni, jestli začneš vstáváním nebo radši ohodnotíš dnešní den.
+		</p>
+		<div class="col-xs-12 text-center">
+		<a n:href="Morning:default" class="btn btn-default btn-lg">Začnu ránem</a>
+		</div>
+		<div class="col-xs-12 text-center">
+		<a n:href="Evening:default" class="btn btn-default btn-lg">Chci začít zhodnocením dnešního dne</a>
+		</div>
+	</div>
+{/if}
