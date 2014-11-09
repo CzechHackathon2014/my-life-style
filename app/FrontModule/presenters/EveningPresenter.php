@@ -9,7 +9,7 @@ namespace app\FrontModule\presenters;
 use Nette\Application\UI\Form,
 	Nette\Utils\DateTime;
 
-class EveningPresenter extends DairyPresenter 
+class EveningPresenter extends DiaryPresenter 
 {
 
 	/**
@@ -48,12 +48,12 @@ class EveningPresenter extends DairyPresenter
 		$form = new Form();
 
 		$form -> addHidden('time_adjusted');
-		$form -> addTextarea('experience_1');
-		$form -> addTextarea('experience_2');
-		$form -> addTextarea('experience_3');
+		$form -> addTextarea('experience_1', 'První zážitek');
+		$form -> addTextarea('experience_2', 'Druhý zážitel');
+		$form -> addTextarea('experience_3', 'Třetí zážitek');
 		$form -> addText('time');
 
-		$form -> addSubmit('submitEvening', 'submit');
+		$form -> addSubmit('submitEvening', 'Uzavřít den');
 
 		$form -> onSuccess[] = callback($this, 'saveEveningForm');
 
@@ -78,8 +78,7 @@ class EveningPresenter extends DairyPresenter
 		if (count($last) == 0){
 			$store_time = new DateTime();
 		} else {
-			$last->fetch();
-			$store_time = $last->date;
+			$store_time = $last->fetch()->date;
 		}
 		
 		

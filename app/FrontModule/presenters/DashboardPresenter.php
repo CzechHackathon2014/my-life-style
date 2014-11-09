@@ -9,7 +9,7 @@ namespace app\FrontModule\presenters;
 use Nette\Application\UI\Form,
 	Nette\Utils\DateTime;
 
-class DashboardPresenter extends DairyPresenter
+class DashboardPresenter extends DiaryPresenter
 {
 
 	public function renderDefault()
